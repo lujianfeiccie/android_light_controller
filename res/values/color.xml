@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_car_hengxian">#8B7D7B</color>
+    <color name="color_car_diagnosis_result_message">#5CCBFF</color>
+    <color name="color_car_additional_result_message">#717171</color>
+    <color name="lightYellow">#e4f808</color>
+    <color name="lightGray">#10C0C0C0</color>
+    
+    <!-- Used in BT_Device_List_Activity -->
+    <drawable name="translucent_background">#55000000</drawable>
+</resources>
