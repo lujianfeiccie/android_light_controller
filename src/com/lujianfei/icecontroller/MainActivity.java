@@ -45,6 +45,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		myApp = (CrashApplication)CrashApplication.getContext();
 		myApp.setHandler(mHandler);
 		findViewById(R.id.bt_confirm).setOnClickListener(this);
+		findViewById(R.id.bt_next).setOnClickListener(this);
+		findViewById(R.id.bt_previous).setOnClickListener(this);
 		edit_ip = (EditText)findViewById(R.id.edit_ip);
 		edit_port = (EditText)findViewById(R.id.edit_port);
 	}
@@ -148,6 +150,12 @@ public class MainActivity extends Activity implements OnClickListener{
 			intent_service.setClass(MainActivity.this, 
 					SocketConnectionService.class);
 			intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.FUNCTION1);
+			MainActivity.this.startService(intent_service);
+		}if(R.id.bt_previous == v.getId()){
+			Intent intent_service = new Intent();
+			intent_service.setClass(MainActivity.this, 
+					SocketConnectionService.class);
+			intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.FUNCTION2);
 			MainActivity.this.startService(intent_service);
 		}
 	}
