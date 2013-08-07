@@ -2,12 +2,15 @@ package com.lujianfei.icecontroller;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -104,16 +107,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			}
 		}
 	};
-	protected void onDestroy() {
-		super.onDestroy();
-		//连接服务端
-		Intent intent_service = new Intent();
-		intent_service.setClass(MainActivity.this, 
-				SocketConnectionService.class);
-		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
-		MainActivity.this.startService(intent_service);
-		MainActivity.this.stopService(intent_service);
-	};
+	
 	void log(String msg){
 		Log.d(tag, msg);
 	}
@@ -160,6 +154,48 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
 	}
 
+	
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		 if(keyCode==KeyEvent.KEYCODE_BACK){
+			 //弹出确定退出对话框
+			 new AlertDialog.Builder(this)
+			  .setTitle("退出")
+			  .setMessage("确定退出吗？")
+			  .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			     @Override
+                 public void onClick(DialogInterface dialog, int which) {
+                     // TODO Auto-generated method stub
+			    	dialog.cancel();
+                    MainActivity.this.finish();
+                 }
+             })
+            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                 @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                     dialog.cancel();
+                 }
+             })
+             .show();
+             //这里不需要执行父类的点击事件，所以直接return
+             return true;
+         }
+		return super.onKeyDown(keyCode, event);
+	}
+
+	protected void onDestroy() {
+		super.onDestroy();
+		//连接服务端
+		Intent intent_service = new Intent();
+		intent_service.setClass(MainActivity.this, 
+				SocketConnectionService.class);
+		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
+		MainActivity.this.startService(intent_service);
+		MainActivity.this.stopService(intent_service);
+	};
 }
 
 
