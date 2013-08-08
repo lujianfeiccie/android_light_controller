@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PPTController</string>
-    <string name="phone">电话</string>
-    <string name="email">邮件</string>
-    <string name="time">时间</string>
-    <string name="message">信息</string>
-    <string name="navigation">导航</string>
-    <string name="explorer">上网</string>
-    <string name="music">音乐</string>
-    <string name="setting">设置</string>
+    <string name="app_name">ICEController</string>
 </resources>

@@ -1,48 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <style name="button">
-        <item name="android:layout_width">300px</item>
-        <item name="android:layout_height">300px</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:gravity">bottom</item>
-        <item name="android:textSize">20sp</item>
+     <style name="checkbox">
+        <item name="android:padding">50dip</item>
     </style>  
-    <style name="button_long">
-        <item name="android:layout_width">400px</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:gravity">bottom</item>
-        <item name="android:textSize">20sp</item>
-    </style>  
-     <style name="image">
-        <item name="android:layout_width">46dip</item>
-        <item name="android:layout_height">46dip</item>
-    </style>  
-      <style name="framelayout">
-        <item name="android:layout_marginLeft">27dip</item>
-        <item name="android:layout_marginTop">10px</item>
-       <item name="android:layout_height">300px</item>
-    </style>  
-    <style name="text">
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-    
-    <!--  Used in BT_Device_List_Activity -->
-    <style name="bklistDialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowBackground">@drawable/translucent_background</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">false</item>
-        <item name="android:windowFullscreen">false</item>
-	</style>
- 	<style name="settingDialog" parent="@android:style/Theme.Dialog">
- 	    <item name="android:windowBackground">@drawable/translucent_background</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">false</item>
-	</style>
 </resources>

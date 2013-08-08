@@ -2,9 +2,13 @@ package com.lujianfei.icecontroller.exception;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.util.Log;
 
+import com.lujianfei.icecontroller.Common;
+import com.lujianfei.icecontroller.model.ConnectionInfo;
 import com.lujianfei.icecontroller.utilities.SystemHelper;
 
 /*
@@ -91,6 +95,19 @@ public class CrashApplication extends Application {
 			// TODO Auto-generated method stub
 		}
 	};
+	public void saveConnectionInfo(String addr,int port){
+		   Editor sharedata = getSharedPreferences("data", 0).edit();   
+		   sharedata.putString(Common.MessageOfService.IP_ADDRESS,addr);
+		   sharedata.putInt(Common.MessageOfService.IP_PORT, port);
+		   sharedata.commit();  
+	}
+	public ConnectionInfo loadConnectionInfo(){
+		ConnectionInfo mConnectionInfo= new ConnectionInfo();
+		SharedPreferences sharedata = getSharedPreferences("data", 0);   
+		mConnectionInfo.setAddr(sharedata.getString(Common.MessageOfService.IP_ADDRESS, "192.168.1.101"));
+		mConnectionInfo.setPort(sharedata.getInt(Common.MessageOfService.IP_PORT,8888));
+		return mConnectionInfo;
+	}
 	void log(String msg){
 		Log.d(tag, msg);
 	}

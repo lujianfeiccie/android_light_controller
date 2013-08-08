@@ -87,14 +87,21 @@ public class SocketConnectionService extends Service {
 				if(ip_addr!=null && port!=0){
 					log("ip_addr="+ip_addr);
 					TcpSocket _Socket = null;
-					try {
-						_Socket = new TcpSocket(new IpAddress(ip_addr),port,_TcpSocketListener);
-						if(_TcpConnection == null){
-							_TcpConnection = new TcpConnection(_Socket,_TcpConnectionListener);
+					if(_TcpConnection ==null){
+						try {
+							_Socket = new TcpSocket(new IpAddress(ip_addr),port,_TcpSocketListener);
+							if(_TcpConnection == null){
+								_TcpConnection = new TcpConnection(_Socket,_TcpConnectionListener);
+							}
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							//e.printStackTrace();
 						}
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						//e.printStackTrace();
+					}else if(_TcpConnection.isRunning()){
+						if (myApp.getHandler() != null) {
+							myApp.getHandler().sendEmptyMessage(
+									Common.UI_CONNECTED);
+						}
 					}
 				}
 			}

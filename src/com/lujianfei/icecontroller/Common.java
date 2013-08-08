@@ -28,10 +28,12 @@ public class Common {
 	public static final int UI_DISCONNECT = 5;
 	public static final int UI_MESSAGE = 6;
 	public static final int UI_SEND_IOEXCEPTION = 7;
+	public static final int UI_CONNECTED = 8;
 	/**
 	 * 服务端关闭服务
 	 */
-	public static final int UI_CONNECTION_TERMINATED = 8;
+	public static final int UI_CONNECTION_TERMINATED = 9;
+	
 	
 	public static class MessageOfService{
 		/**
@@ -67,7 +69,20 @@ public class Common {
 		 */
 		public static final String FUNCTION1_ON= "FUNCTION1_ON";
 		public static final String FUNCTION1_OFF= "FUNCTION1_OFF";
+		
 		public static final String FUNCTION2_ON = "FUNCTION2_ON";
 		public static final String FUNCTION2_OFF = "FUNCTION2_OFF";
+		
+		public static final String FUNCTION3_ON = "FUNCTION3_ON";
+		public static final String FUNCTION3_OFF = "FUNCTION3_OFF";
+		
+		public static final String FUNCTION4_ON = "FUNCTION4_ON";
+		public static final String FUNCTION4_OFF = "FUNCTION4_OFF";
+		
+		public static final String FUNCTION5_ON = "FUNCTION5_ON";
+		public static final String FUNCTION5_OFF = "FUNCTION5_OFF";
+		
+		public static final String FUNCTION6_ON = "FUNCTION6_ON";
+		public static final String FUNCTION6_OFF = "FUNCTION6_OFF";
 	}
 }

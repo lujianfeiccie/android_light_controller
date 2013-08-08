@@ -15,7 +15,6 @@
             android:layout_weight="0.82"
             android:hint="请输入IP地址" 
             android:text="192.168.1.112">
-
             <requestFocus />
         </EditText>
     </LinearLayout>
@@ -38,30 +37,71 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
       >
-
         <Button
             android:id="@+id/bt_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="确认" />
+            android:text="连接" />
          <Button
             android:id="@+id/bt_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-             android:text="取消" />
-    </LinearLayout>
-	<Button
-	    android:id="@+id/bt_next"
-	    android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_weight="1"
-    	android:text="下一页"></Button>
-	<Button
-	    android:id="@+id/bt_previous"
-	    android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_weight="1"
-    	android:text="上一页"></Button>
+             android:text="断开" />
+         
+         
+    </LinearLayout><TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <TableRow>
+            <CheckBox
+                android:id="@+id/cb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                style="@style/checkbox"
+                android:text="开关1" />
+            <CheckBox
+                android:id="@+id/cb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                style="@style/checkbox"
+                android:text="开关2" />
+        </TableRow>
+        <TableRow>
+             <CheckBox
+                android:id="@+id/cb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                style="@style/checkbox"
+                android:text="开关3" />
+             <CheckBox
+	        android:id="@+id/cb4"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:checked="false"
+	        style="@style/checkbox"
+	        android:text="开关4"/>
+        </TableRow>
+        <TableRow>
+            
+	<CheckBox
+	        android:id="@+id/cb5"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:checked="false"
+	        style="@style/checkbox"
+	        android:text="开关5"/>
+	<CheckBox
+	        android:id="@+id/cb6"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:checked="false"
+	        style="@style/checkbox"
+	        android:text="开关6"/>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

@@ -1,6 +1,9 @@
 package com.lujianfei.icecontroller;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,10 +17,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lujianfei.icecontroller.exception.CrashApplication;
+import com.lujianfei.icecontroller.model.ConnectionInfo;
 import com.lujianfei.icecontroller.services.SocketConnectionService;
 
 /*
@@ -34,7 +40,7 @@ import com.lujianfei.icecontroller.services.SocketConnectionService;
 类中的代码包括三个区段：类变量区、类属性区、类方法区。
 文件调用:
  */
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends Activity implements OnClickListener,android.widget.CompoundButton.OnCheckedChangeListener{
 	String tag = "MainActivity";
 	ProgressDialog pd = null;
 	
@@ -43,6 +49,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	EditText edit_ip = null,edit_port=null;
 	
 	boolean isDisconnectedByMyself = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -52,15 +59,32 @@ public class MainActivity extends Activity implements OnClickListener{
 		myApp = (CrashApplication)CrashApplication.getContext();
 		myApp.setHandler(mHandler);
 		
-		//InitView
-		findViewById(R.id.bt_confirm).setOnClickListener(this);
-		findViewById(R.id.bt_cancel).setOnClickListener(this);
-		findViewById(R.id.bt_next).setOnClickListener(this);
-		findViewById(R.id.bt_previous).setOnClickListener(this);
-		edit_ip = (EditText)findViewById(R.id.edit_ip);
-		edit_port = (EditText)findViewById(R.id.edit_port);
+		//Initialize View
+		initView();
+		
+		//Initialize Data
+	    initData();
 	}
-	 
+	 private void initData() {
+		// TODO Auto-generated method stub
+		 ConnectionInfo  mConnectionInfo = myApp.loadConnectionInfo();
+		 edit_ip.setText(mConnectionInfo.getAddr());
+		 edit_port.setText(""+mConnectionInfo.getPort());
+	}
+	void initView(){
+		 	findViewById(R.id.bt_confirm).setOnClickListener(this);
+			findViewById(R.id.bt_cancel).setOnClickListener(this);
+			
+			edit_ip = (EditText)findViewById(R.id.edit_ip);
+			edit_port = (EditText)findViewById(R.id.edit_port);
+			
+			 ((CheckBox)findViewById(R.id.cb1)).setOnCheckedChangeListener(this);
+			 ((CheckBox)findViewById(R.id.cb2)).setOnCheckedChangeListener(this);
+			 ((CheckBox)findViewById(R.id.cb3)).setOnCheckedChangeListener(this);
+			 ((CheckBox)findViewById(R.id.cb4)).setOnCheckedChangeListener(this);
+			 ((CheckBox)findViewById(R.id.cb5)).setOnCheckedChangeListener(this);
+			 ((CheckBox)findViewById(R.id.cb6)).setOnCheckedChangeListener(this);
+	 }
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -103,6 +127,8 @@ public class MainActivity extends Activity implements OnClickListener{
 				pd.dismiss();
 				Toast.makeText(MainActivity.this
 						, "成功连接!", 200).show();
+				myApp.saveConnectionInfo(edit_ip.getText().toString(),
+						Integer.parseInt(edit_port.getText().toString()));
 				//找到了
 				break;
 			case Common.UI_CONNECT_FAILED:{//没找到
@@ -123,6 +149,12 @@ public class MainActivity extends Activity implements OnClickListener{
 				DialogConnectionTerminated();
 				}
 				break;
+			case Common.UI_CONNECTED:{
+				pd.setMessage("已连接!");
+				pd.dismiss();
+				Toast.makeText(MainActivity.this, "已连接！", 200).show();
+				}
+			break;
 			}
 			
 		}
@@ -140,14 +172,66 @@ public class MainActivity extends Activity implements OnClickListener{
 		}else if(R.id.bt_cancel == v.getId()){
 			//断开请求
 			RequestServiceDisconnect();
-		}else if(R.id.bt_next == v.getId()){
-			RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_ON);
-		}else if(R.id.bt_previous == v.getId()){
-			RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_OFF);
 		}
 	}
-
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		// TODO Auto-generated method stub
+		if(isChecked){
+			switch(buttonView.getId()){
+			case R.id.cb1:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_ON);
+				break;
+			case R.id.cb2:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION2_ON);
+				break;
+			case R.id.cb3:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION3_ON);
+				break;
+			case R.id.cb4:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION4_ON);
+				break;
+			case R.id.cb5:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION5_ON);
+				break;
+			case R.id.cb6:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION6_ON);
+				break;
+			}
+		}else{
+			switch(buttonView.getId()){
+			case R.id.cb1:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_OFF);
+				break;
+			case R.id.cb2:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION2_OFF);
+				break;
+			case R.id.cb3:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION3_OFF);
+				break;
+			case R.id.cb4:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION4_OFF);
+				break;
+			case R.id.cb5:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION5_OFF);
+				break;
+			case R.id.cb6:
+				RequestServiceFunction(Common.MessageValueOfService.FUNCTION6_OFF);
+				break;
+			}
+		}
+	};
 	void RequestServiceConnect(String addr,int port){
+		Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
+		Matcher matcher = pattern.matcher(addr); //以验证127.400.600.2为例
+		if(!matcher.matches()){
+			Toast.makeText(this, "请输入正确的IP地址", 200).show();
+			return;
+		}
+		if(port>1024 && port<65535){
+			Toast.makeText(this, "请输入正确范围的端口号(1024,65535)", 200).show();
+			return;
+		}
 		//连接请求
 		Intent intent_service = new Intent();
 		intent_service.setClass(MainActivity.this, 
@@ -162,8 +246,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	
 	void RequestServiceDisconnect(){
 		//连接请求
-		//log("RequestServiceDisconnect");
-		Toast.makeText(this, "RequestServiceDisconnect", 200).show();
+		log("RequestServiceDisconnect");
+		Toast.makeText(this, "已断开!", 200).show();
 		isDisconnectedByMyself = true;
 		Intent intent_service = new Intent();
 		intent_service.setClass(MainActivity.this, 
@@ -234,7 +318,7 @@ public class MainActivity extends Activity implements OnClickListener{
          }
 		return super.onKeyDown(keyCode, event);
 	}
-
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -253,7 +337,7 @@ public class MainActivity extends Activity implements OnClickListener{
 //		MainActivity.this.startService(intent_service);
 		MainActivity.this.stopService(intent_service);
 		
-	};
+	}
 }
 
 
