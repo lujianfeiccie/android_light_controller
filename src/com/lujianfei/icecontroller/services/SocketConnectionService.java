@@ -2,37 +2,26 @@ package com.lujianfei.icecontroller.services;
 
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import android.app.ActivityManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.app.ActivityManager.MemoryInfo;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.text.format.Formatter;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.lujianfei.icecontroller.Common;
+import com.lujianfei.icecontroller.MyFunction;
 import com.lujianfei.icecontroller.Protocol;
 import com.lujianfei.icecontroller.exception.CrashApplication;
+import com.lujianfei.icecontroller.ifunction.IFunction;
 import com.lujianfei.icecontroller.socket.IpAddress;
 import com.lujianfei.icecontroller.socket.TcpConnection;
 import com.lujianfei.icecontroller.socket.TcpConnectionListener;
 import com.lujianfei.icecontroller.socket.TcpSocket;
 import com.lujianfei.icecontroller.socket.TcpSocketListener;
-import com.lujianfei.icecontroller.utilities.MyLog;
-import com.lujianfei.icecontroller.utilities.ScreenHelper;
-import com.lujianfei.icecontroller.utilities.SystemHelper;
 
 /*
 版权所有：版权所有(C)2013，固派软件
@@ -68,6 +57,7 @@ public class SocketConnectionService extends Service {
 	
 	CrashApplication myApp = null;
 	
+	IFunction function = null;
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -76,6 +66,7 @@ public class SocketConnectionService extends Service {
 		
 		myApp = (CrashApplication)CrashApplication.getContext();
 		_TcpConnection = null;
+		function = new MyFunction();
 	}
 	@Override
 	public void onStart(Intent intent, int startId) {
@@ -123,32 +114,15 @@ public class SocketConnectionService extends Service {
 					_TcpConnection = null;
 				}
 				myApp.setConnecting(false);
-			} else if(msg_request.equals(Common.MessageValueOfService.FUNCTION1)){
+			} else{
 				if(_TcpConnection!=null && _TcpConnection.isRunning()){
 					log("FUNCTION1");
-					byte[] data = new byte[1];
-					data[0]=(byte)0x01;
+					byte[] data = ((MyFunction)function).parseFunction(msg_request);
+					if(data==null) return;
 					try {
 						_TcpConnection.send(data);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
-						if (myApp.getHandler() != null) {
-							myApp.getHandler().sendEmptyMessage(
-									Common.UI_SEND_IOEXCEPTION);
-						}
-						log(""+e.getMessage());
-					}
-				}
-			}else if(msg_request.equals(Common.MessageValueOfService.FUNCTION2)){
-				if(_TcpConnection!=null && _TcpConnection.isRunning()){
-					log("FUNCTION2");
-					byte[] data = new byte[1];
-					data[0]=(byte)0x02;
-					try {
-						_TcpConnection.send(data);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						//e.printStackTrace();
 						if (myApp.getHandler() != null) {
 							myApp.getHandler().sendEmptyMessage(
 									Common.UI_SEND_IOEXCEPTION);
@@ -158,8 +132,6 @@ public class SocketConnectionService extends Service {
 				}
 			}// end of msg_request.equals(Common.MessageValueOfService.LAUNCH_BT_CONNECTION_SERVICE)
 		}//end of if(msg_request !=null)
-		
-		
 	}
 	 
 	TcpSocketListener _TcpSocketListener = new TcpSocketListener(){

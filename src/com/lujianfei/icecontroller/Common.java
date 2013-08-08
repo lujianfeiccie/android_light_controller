@@ -61,7 +61,13 @@ public class Common {
 		 * 关闭Tcp断开连接服务
 		 */
 		public static final String LAUNCH_TCP_DISCONNECTION_SERVICE= "LAUNCH_TCP_DISCONNECTION_SERVICE";
-		public static final String FUNCTION1= "FUNCTION1";
-		public static final String FUNCTION2 = "FUNCTION2";
+		
+		/**
+		 * 功能
+		 */
+		public static final String FUNCTION1_ON= "FUNCTION1_ON";
+		public static final String FUNCTION1_OFF= "FUNCTION1_OFF";
+		public static final String FUNCTION2_ON = "FUNCTION2_ON";
+		public static final String FUNCTION2_OFF = "FUNCTION2_OFF";
 	}
 }

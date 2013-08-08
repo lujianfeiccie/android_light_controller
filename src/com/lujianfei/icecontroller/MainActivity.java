@@ -141,9 +141,9 @@ public class MainActivity extends Activity implements OnClickListener{
 			//¶Ï¿ªÇëÇó
 			RequestServiceDisconnect();
 		}else if(R.id.bt_next == v.getId()){
-			RequestServiceFunction(Common.MessageValueOfService.FUNCTION1);
+			RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_ON);
 		}else if(R.id.bt_previous == v.getId()){
-			RequestServiceFunction(Common.MessageValueOfService.FUNCTION2);
+			RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_OFF);
 		}
 	}
 
