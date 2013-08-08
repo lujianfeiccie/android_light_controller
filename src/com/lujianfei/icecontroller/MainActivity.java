@@ -3,6 +3,7 @@ package com.lujianfei.icecontroller;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,14 +41,20 @@ public class MainActivity extends Activity implements OnClickListener{
 	CrashApplication myApp = null;
 	
 	EditText edit_ip = null,edit_port=null;
+	
+	boolean isDisconnectedByMyself = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
 		myApp = (CrashApplication)CrashApplication.getContext();
 		myApp.setHandler(mHandler);
+		
+		//InitView
 		findViewById(R.id.bt_confirm).setOnClickListener(this);
+		findViewById(R.id.bt_cancel).setOnClickListener(this);
 		findViewById(R.id.bt_next).setOnClickListener(this);
 		findViewById(R.id.bt_previous).setOnClickListener(this);
 		edit_ip = (EditText)findViewById(R.id.edit_ip);
@@ -98,13 +105,26 @@ public class MainActivity extends Activity implements OnClickListener{
 						, "成功连接!", 200).show();
 				//找到了
 				break;
-			case Common.UI_CONNECT_FAILED://没找到
+			case Common.UI_CONNECT_FAILED:{//没找到
 				pd.setMessage("连接失败");
 				pd.dismiss();
-				Toast.makeText(MainActivity.this
-						, "连接失败!", 200).show();
+				//连接后发送时出现的异常
+				DialogConnectionTerminated();
+				}
+				break;
+			case Common.UI_SEND_IOEXCEPTION:{
+				//连接后发送时出现的异常
+				DialogConnectionTerminated();
+				}
+				break;
+			case Common.UI_CONNECTION_TERMINATED:{
+				if(isDisconnectedByMyself) break;
+				//连接后发送时出现的异常
+				DialogConnectionTerminated();
+				}
 				break;
 			}
+			
 		}
 	};
 	
@@ -114,48 +134,77 @@ public class MainActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		/*
-		//请求上一页
-		Intent intent_service = new Intent();
-		intent_service.setClass(MainActivity.this, 
-				SocketConnectionService.class);
-		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_FILE_PREVIOUS);
-		MainActivity.this.startService(intent_service);
-		*/
 		if(R.id.bt_confirm == v.getId()){
-			//请求上一页
-			Intent intent_service = new Intent();
-			intent_service.setClass(MainActivity.this, 
-					SocketConnectionService.class);
-			intent_service.putExtra(Common.MessageOfService.IP_ADDRESS, edit_ip.getText().toString());
-			intent_service.putExtra(Common.MessageOfService.IP_PORT, Integer.parseInt(edit_port.getText().toString()));
-			intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_CONNECTION_SERVICE);
-			MainActivity.this.startService(intent_service);
-			pd = ProgressDialog.show(this, "提示", "正在连接中...请稍候");
+			//连接请求
+			RequestServiceConnect(edit_ip.getText().toString(),Integer.parseInt(edit_port.getText().toString()));
 		}else if(R.id.bt_cancel == v.getId()){
-			//请求上一页
-			Intent intent_service = new Intent();
-			intent_service.setClass(MainActivity.this, 
-					SocketConnectionService.class);
-			intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
-			MainActivity.this.startService(intent_service);
-		}if(R.id.bt_next == v.getId()){
-			Intent intent_service = new Intent();
-			intent_service.setClass(MainActivity.this, 
-					SocketConnectionService.class);
-			intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.FUNCTION1);
-			MainActivity.this.startService(intent_service);
-		}if(R.id.bt_previous == v.getId()){
-			Intent intent_service = new Intent();
-			intent_service.setClass(MainActivity.this, 
-					SocketConnectionService.class);
-			intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.FUNCTION2);
-			MainActivity.this.startService(intent_service);
+			//断开请求
+			RequestServiceDisconnect();
+		}else if(R.id.bt_next == v.getId()){
+			RequestServiceFunction(Common.MessageValueOfService.FUNCTION1);
+		}else if(R.id.bt_previous == v.getId()){
+			RequestServiceFunction(Common.MessageValueOfService.FUNCTION2);
 		}
 	}
 
+	void RequestServiceConnect(String addr,int port){
+		//连接请求
+		Intent intent_service = new Intent();
+		intent_service.setClass(MainActivity.this, 
+				SocketConnectionService.class);
+		intent_service.putExtra(Common.MessageOfService.IP_ADDRESS, addr);
+		intent_service.putExtra(Common.MessageOfService.IP_PORT, port);
+		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_CONNECTION_SERVICE);
+		MainActivity.this.startService(intent_service);
+		pd = ProgressDialog.show(this, "提示", "正在连接中...请稍候");
+		isDisconnectedByMyself = false;
+	}
+	
+	void RequestServiceDisconnect(){
+		//连接请求
+		//log("RequestServiceDisconnect");
+		Toast.makeText(this, "RequestServiceDisconnect", 200).show();
+		isDisconnectedByMyself = true;
+		Intent intent_service = new Intent();
+		intent_service.setClass(MainActivity.this, 
+				SocketConnectionService.class);
+		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
+		MainActivity.this.startService(intent_service);
+	}
 	
 	
+	void RequestServiceFunction(String requestType){
+		Intent intent_service = new Intent();
+		intent_service.setClass(MainActivity.this, 
+				SocketConnectionService.class);
+		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,requestType);
+		MainActivity.this.startService(intent_service);
+	}
+	
+	void DialogConnectionTerminated(){
+		//连接后发送时出现的异常
+		Dialog alertDialog = new AlertDialog.Builder(MainActivity.this). 
+                setTitle("提示"). 
+                setMessage("连接异常，重连?"). 
+                setIcon(R.drawable.ic_launcher). 
+                setPositiveButton("确定", new DialogInterface.OnClickListener() { 
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+                        // TODO Auto-generated method stub 
+                    	dialog.dismiss();
+                    	RequestServiceConnect(edit_ip.getText().toString(), Integer.parseInt(edit_port.getText().toString()));
+                    } 
+                }). 
+                setNegativeButton("取消", new DialogInterface.OnClickListener() { 
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+                        // TODO Auto-generated method stub  
+                    	dialog.dismiss();
+                    } 
+                }). 
+                create(); 
+        alertDialog.show(); 
+	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
@@ -186,15 +235,24 @@ public class MainActivity extends Activity implements OnClickListener{
 		return super.onKeyDown(keyCode, event);
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+	}
+
 	protected void onDestroy() {
 		super.onDestroy();
+		myApp.setHandler(null);
 		//连接服务端
 		Intent intent_service = new Intent();
 		intent_service.setClass(MainActivity.this, 
 				SocketConnectionService.class);
-		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
-		MainActivity.this.startService(intent_service);
+//		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
+//		MainActivity.this.startService(intent_service);
 		MainActivity.this.stopService(intent_service);
+		
 	};
 }
 

@@ -27,7 +27,11 @@ public class Common {
 	public static final int UI_CONNECT_FAILED = 4;
 	public static final int UI_DISCONNECT = 5;
 	public static final int UI_MESSAGE = 6;
-	
+	public static final int UI_SEND_IOEXCEPTION = 7;
+	/**
+	 * 服务端关闭服务
+	 */
+	public static final int UI_CONNECTION_TERMINATED = 8;
 	
 	public static class MessageOfService{
 		/**

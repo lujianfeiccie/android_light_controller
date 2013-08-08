@@ -67,6 +67,7 @@ public class SocketConnectionService extends Service {
 	TcpConnection _TcpConnection = null;
 	
 	CrashApplication myApp = null;
+	
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -120,29 +121,39 @@ public class SocketConnectionService extends Service {
 						log("ExitClient:"+e.getMessage());
 					}
 					_TcpConnection = null;
-					myApp.setConnecting(false);
 				}
 				myApp.setConnecting(false);
 			} else if(msg_request.equals(Common.MessageValueOfService.FUNCTION1)){
 				if(_TcpConnection!=null && _TcpConnection.isRunning()){
+					log("FUNCTION1");
 					byte[] data = new byte[1];
 					data[0]=(byte)0x01;
 					try {
 						_TcpConnection.send(data);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						if (myApp.getHandler() != null) {
+							myApp.getHandler().sendEmptyMessage(
+									Common.UI_SEND_IOEXCEPTION);
+						}
+						log(""+e.getMessage());
 					}
 				}
 			}else if(msg_request.equals(Common.MessageValueOfService.FUNCTION2)){
 				if(_TcpConnection!=null && _TcpConnection.isRunning()){
+					log("FUNCTION2");
 					byte[] data = new byte[1];
 					data[0]=(byte)0x02;
 					try {
 						_TcpConnection.send(data);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						//e.printStackTrace();
+						if (myApp.getHandler() != null) {
+							myApp.getHandler().sendEmptyMessage(
+									Common.UI_SEND_IOEXCEPTION);
+						}
+						log(""+e.getMessage());
 					}
 				}
 			}// end of msg_request.equals(Common.MessageValueOfService.LAUNCH_BT_CONNECTION_SERVICE)
@@ -226,6 +237,11 @@ public class SocketConnectionService extends Service {
 		public void onConnectionTerminated(TcpConnection tcp_conn,
 				Exception error) {
 			// TODO Auto-generated method stub
+			log("onConnectionTerminated");
+			if (myApp.getHandler() != null) {
+				myApp.getHandler().sendEmptyMessage(
+						Common.UI_CONNECTION_TERMINATED);
+			}
 			myApp.setConnecting(false);
 		}
 	};
@@ -237,8 +253,16 @@ public class SocketConnectionService extends Service {
 //		if(bt_client!=null){
 //			bt_client.ExitThread();
 //		}
-		if(_TcpConnection!=null){
+		if(_TcpConnection!=null && _TcpConnection.isRunning()){
+			//ExitClient();
 			_TcpConnection.halt();
+			try {
+				_TcpConnection.getSocket().close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				log("ExitClient:"+e.getMessage());
+			}
 			_TcpConnection = null;
 		}
 	}

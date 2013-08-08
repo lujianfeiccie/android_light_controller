@@ -115,7 +115,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             @Override  
             public void run() {  
                 Looper.prepare();  
-                Toast.makeText(mContext, "很抱歉,请先将内存清理后再运行SMART IVI服务.", Toast.LENGTH_LONG).show();  
+                Toast.makeText(mContext, "出现异常.", Toast.LENGTH_LONG).show();  
                 Looper.loop();  
             }  
         }.start();  
