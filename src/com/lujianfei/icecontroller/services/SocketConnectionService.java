@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 
 import com.lujianfei.icecontroller.Common;
@@ -121,6 +122,28 @@ public class SocketConnectionService extends Service {
 					_TcpConnection = null;
 				}
 				myApp.setConnecting(false);
+			} else if(msg_request.equals(Common.MessageValueOfService.FUNCTION_STATUS)){
+				log("LAUNCH_TCP_DISCONNECTION_SERVICE");
+				//πÿ±’¿∂—¿¡¨Ω”
+				if(_TcpConnection!=null && _TcpConnection.isRunning()){
+					if (myApp.getHandler() != null) {
+						Message handler_msg = new Message();
+						handler_msg.what = Common.UI_CONNECTION_STATE;
+						handler_msg.arg1 = Common.UI_CONNECTION_STATE_CONNECTED;
+						myApp.getHandler().sendMessage(
+								handler_msg);
+					}
+					myApp.setConnecting(true);
+				}else{
+					if (myApp.getHandler() != null) {
+						Message handler_msg = new Message();
+						handler_msg.what = Common.UI_CONNECTION_STATE;
+						handler_msg.arg1 = Common.UI_CONNECTION_STATE_DISCONNECTED;
+						myApp.getHandler().sendMessage(
+								handler_msg);
+					}
+					myApp.setConnecting(false);
+				}
 			} else{
 				if(_TcpConnection!=null && _TcpConnection.isRunning()){
 					log("FUNCTION1");

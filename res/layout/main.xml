@@ -49,11 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
              android:text="断开" />
-         
-         
-    </LinearLayout><TableLayout
+    </LinearLayout>
+    <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content" >
         <TableRow>
             <CheckBox
                 android:id="@+id/cb1"
@@ -95,7 +94,7 @@
 	        android:checked="false"
 	        style="@style/checkbox"
 	        android:text="开关5"/>
-	<CheckBox
+		<CheckBox
 	        android:id="@+id/cb6"
 	        android:layout_width="wrap_content" 
 	        android:layout_height="wrap_content"
@@ -104,4 +103,16 @@
 	        android:text="开关6"/>
         </TableRow>
     </TableLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+      >
+         <TextView
+         android:id="@+id/txt_status_msg"
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="" />
+    </LinearLayout>
 </LinearLayout>

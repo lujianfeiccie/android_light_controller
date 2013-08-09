@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lujianfei.icecontroller.exception.CrashApplication;
@@ -47,6 +48,8 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 	CrashApplication myApp = null;
 	
 	EditText edit_ip = null,edit_port=null;
+	
+	TextView txt_status_msg = null;
 	
 	boolean isDisconnectedByMyself = false;
 	
@@ -84,6 +87,9 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 			 ((CheckBox)findViewById(R.id.cb4)).setOnCheckedChangeListener(this);
 			 ((CheckBox)findViewById(R.id.cb5)).setOnCheckedChangeListener(this);
 			 ((CheckBox)findViewById(R.id.cb6)).setOnCheckedChangeListener(this);
+			 
+			 
+  		 txt_status_msg = (TextView)findViewById(R.id.txt_status_msg);
 	 }
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -120,9 +126,11 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 			super.handleMessage(msg);
 			switch(msg.what){
 			case Common.UI_CONNECTING://Searching
+				log("UI_CONNECTING");
 				pd.setMessage("正在连接中,请稍后...");
 					break;
 			case Common.UI_CONNECT_SUCCESFULLY://Found
+				log("UI_CONNECT_SUCCESFULLY");
 				pd.setMessage("成功连接");
 				pd.dismiss();
 				Toast.makeText(MainActivity.this
@@ -130,8 +138,10 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 				myApp.saveConnectionInfo(edit_ip.getText().toString(),
 						Integer.parseInt(edit_port.getText().toString()));
 				//找到了
+				txt_status_msg.setText("已连接");
 				break;
 			case Common.UI_CONNECT_FAILED:{//没找到
+				log("UI_CONNECT_FAILED");
 				pd.setMessage("连接失败");
 				pd.dismiss();
 				//连接后发送时出现的异常
@@ -139,21 +149,35 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 				}
 				break;
 			case Common.UI_SEND_IOEXCEPTION:{
+				log("UI_SEND_IOEXCEPTION");
 				//连接后发送时出现的异常
 				DialogConnectionTerminated();
 				}
 				break;
 			case Common.UI_CONNECTION_TERMINATED:{
+				log("UI_CONNECTION_TERMINATED");
 				if(isDisconnectedByMyself) break;
 				//连接后发送时出现的异常
 				DialogConnectionTerminated();
 				}
 				break;
 			case Common.UI_CONNECTED:{
+				log("UI_CONNECTED");
 				pd.setMessage("已连接!");
 				pd.dismiss();
 				Toast.makeText(MainActivity.this, "已连接！", 200).show();
+				txt_status_msg.setText("已连接");
 				}
+			case Common.UI_CONNECTION_STATE:{
+				log("UI_CONNECTION_STATE");
+				if(msg.arg1 == Common.UI_CONNECTION_STATE_CONNECTED){
+					txt_status_msg.setText("已连接");
+					log("CONNECTED");
+				}else{
+					txt_status_msg.setText("未连接");
+					log("DISCONNECTED");
+				}
+			}
 			break;
 			}
 			
@@ -228,7 +252,7 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 			Toast.makeText(this, "请输入正确的IP地址", 200).show();
 			return;
 		}
-		if(port>1024 && port<65535){
+		if(port<=1024 || port>=65535){
 			Toast.makeText(this, "请输入正确范围的端口号(1024,65535)", 200).show();
 			return;
 		}
@@ -323,7 +347,8 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+		log("onResume");
+		RequestServiceFunction(Common.MessageValueOfService.FUNCTION_STATUS);
 	}
 
 	protected void onDestroy() {

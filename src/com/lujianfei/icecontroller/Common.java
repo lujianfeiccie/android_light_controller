@@ -29,10 +29,13 @@ public class Common {
 	public static final int UI_MESSAGE = 6;
 	public static final int UI_SEND_IOEXCEPTION = 7;
 	public static final int UI_CONNECTED = 8;
+	public static final int UI_CONNECTION_STATE = 9;
+	public static final int UI_CONNECTION_STATE_CONNECTED = 1;
+	public static final int UI_CONNECTION_STATE_DISCONNECTED = 2;
 	/**
 	 * 服务端关闭服务
 	 */
-	public static final int UI_CONNECTION_TERMINATED = 9;
+	public static final int UI_CONNECTION_TERMINATED = 10;
 	
 	
 	public static class MessageOfService{
@@ -84,5 +87,9 @@ public class Common {
 		
 		public static final String FUNCTION6_ON = "FUNCTION6_ON";
 		public static final String FUNCTION6_OFF = "FUNCTION6_OFF";
+		/**
+		 * 连接状态查询
+		 */
+		public static final String FUNCTION_STATUS = "FUNCTION_STATUS";
 	}
 }
