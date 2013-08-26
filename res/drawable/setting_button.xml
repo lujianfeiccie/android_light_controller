@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+		<item android:state_window_focused="false" android:drawable="@drawable/setting_button_all" />
+	   <item android:state_focused="true" android:drawable="@drawable/setting_button_all" />  <!--这个地方就是前面设置的xml文件名称-->
+	   <item android:state_enabled="true" android:state_pressed="true" android:drawable="@drawable/setting_button_all_hover" />
+</selector>

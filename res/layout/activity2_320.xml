@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/title_back"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@id/btn_home"
+        android:layout_width="50.0dip"
+        android:layout_height="30.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60.0dip"
+        android:layout_marginTop="5.0dip"
+        android:background="@drawable/btn_home_background"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@id/imageView3"
+        android:layout_width="80.0dip"
+        android:layout_height="30.0dip"
+        android:layout_alignTop="@id/btn_home"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@id/username"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/btn_home"
+        android:layout_alignBottom="@id/btn_home"
+        android:layout_marginLeft="35.0dip"
+        android:layout_marginRight="5.0dip"
+        android:layout_toRightOf="@id/imageView3"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/imageView1" >
+
+        <ImageView
+            android:id="@id/imageView2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/back" />
+
+        <RelativeLayout
+            android:id="@id/circleImageView_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="200.0dip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="90.0dip" >
+
+            <com.lujianfei.icecontroller.ui.custom.CircleImageView
+                android:id="@id/circleImageView"
+                android:layout_width="200.0dip"
+                android:layout_height="200.0dip"
+                android:background="@drawable/circle_back2" />
+
+            <com.lujianfei.icecontroller.ui.custom.RGBKeyButton
+                android:id="@id/btn_rgb"
+                android:layout_width="35.0dip"
+                android:layout_height="35.0dip"
+                android:layout_centerInParent="true"
+                rgbBackground="@drawable/btn_center_rpg_background"
+                rBackground="@drawable/btn_center_r_background"
+                gBackground="@drawable/btn_center_g_background"
+                bBackground="@drawable/btn_center_b_background"/>
+        </RelativeLayout>
+
+        <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+            android:id="@id/btn_1"
+            android:layout_width="50.0dip"
+            android:layout_height="113.0dip"
+            android:layout_alignLeft="@id/circleImageView_rl"
+            android:layout_below="@id/circleImageView_rl"
+            android:layout_marginLeft="-15.0dip"
+            android:layout_marginTop="0.0dip"
+            onBackground="@drawable/one_1_up"
+        normalBackground="@drawable/one_1"
+        offBackground="@drawable/one_1_down" />
+
+        <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+            android:id="@id/btn_2"
+            android:layout_width="50.0dip"
+            android:layout_height="113.0dip"
+            android:layout_below="@id/circleImageView_rl"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="20.0dip"
+            android:layout_toRightOf="@id/btn_1"
+            onBackground="@drawable/one_2_up"
+        normalBackground="@drawable/one_2"
+        offBackground="@drawable/one_2_down"/>
+
+        <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+            android:id="@id/btn_3"
+            android:layout_width="50.0dip"
+            android:layout_height="113.0dip"
+            android:layout_below="@id/circleImageView_rl"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="20.0dip"
+            android:layout_toLeftOf="@id/btn_4"
+            onBackground="@drawable/one_3_up"
+        normalBackground="@drawable/one_3"
+        offBackground="@drawable/one_3_down" />
+
+        <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+            android:id="@id/btn_4"
+            android:layout_width="50.0dip"
+            android:layout_height="113.0dip"
+            android:layout_alignRight="@id/circleImageView_rl"
+            android:layout_below="@id/circleImageView_rl"
+            android:layout_marginRight="-15.0dip"
+            onBackground="@drawable/one_4_up"
+        normalBackground="@drawable/one_4"
+        offBackground="@drawable/one_4_down"/>
+
+        <Button
+            android:id="@id/btn_on"
+            android:layout_width="90.0dip"
+            android:layout_height="35.0dip"
+            android:layout_alignLeft="@id/circleImageView_rl"
+            android:layout_alignTop="@id/circleImageView_rl"
+            android:layout_marginLeft="-14.0dip"
+            android:layout_marginTop="-80.0dip"
+            android:background="@drawable/btn_on_background" />
+
+        <Button
+            android:id="@id/btn_off"
+            android:layout_width="90.0dip"
+            android:layout_height="35.0dip"
+            android:layout_alignBaseline="@id/btn_on"
+            android:layout_alignRight="@id/circleImageView_rl"
+            android:layout_marginRight="-14.0dip"
+            android:background="@drawable/btn_off_background" />
+
+        <Button
+            android:id="@id/btn_bright_up"
+            android:layout_width="90.0dip"
+            android:layout_height="35.0dip"
+            android:layout_alignBaseline="@id/btn_bright_down"
+            android:layout_alignRight="@id/btn_off"
+            android:background="@drawable/btn_bright_up_background" />
+
+        <Button
+            android:id="@id/btn_bright_down"
+            android:layout_width="90.0dip"
+            android:layout_height="35.0dip"
+            android:layout_alignLeft="@id/btn_on"
+            android:layout_marginTop="55.0dip"
+            android:background="@drawable/btn_bright_down_background" />
+    </RelativeLayout>
+
+</RelativeLayout>

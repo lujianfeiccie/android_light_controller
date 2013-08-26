@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/setting_bg"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout style="@style/setting_bg_layout" >
+
+            <!-- 反馈建议 -->
+
+            <LinearLayout style="@style/setting_bg_top_layout" >
+
+                <TextView
+                    style="@style/textview"
+                    android:text="IP地址"
+                    />
+                
+                 <EditText
+                     style="@style/edittext"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@drawable/setting_shape_line" />
+
+            <!-- 关于 -->
+
+            <LinearLayout style="@style/setting_bg_bottom_layout" >
+
+                <TextView
+                   style="@style/textview"
+                    android:text="端口"
+                    />
+                
+                <EditText
+                     style="@style/edittext"/>
+            </LinearLayout>
+        </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+             android:padding="10dp" >
+             <Button
+                 android:layout_width="fill_parent"
+                 android:layout_height="40dp"
+                 android:layout_weight="0.93"
+                 android:background="@drawable/setting_button"
+                 android:text="确定"
+                 android:textColor="@color/setting_button" />
+         </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

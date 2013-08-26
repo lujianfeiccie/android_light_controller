@@ -80,16 +80,6 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 			
 			edit_ip = (EditText)findViewById(R.id.edit_ip);
 			edit_port = (EditText)findViewById(R.id.edit_port);
-			
-			 ((CheckBox)findViewById(R.id.cb1)).setOnCheckedChangeListener(this);
-			 ((CheckBox)findViewById(R.id.cb2)).setOnCheckedChangeListener(this);
-			 ((CheckBox)findViewById(R.id.cb3)).setOnCheckedChangeListener(this);
-			 ((CheckBox)findViewById(R.id.cb4)).setOnCheckedChangeListener(this);
-			 ((CheckBox)findViewById(R.id.cb5)).setOnCheckedChangeListener(this);
-			 ((CheckBox)findViewById(R.id.cb6)).setOnCheckedChangeListener(this);
-			 
-			 
-  		 txt_status_msg = (TextView)findViewById(R.id.txt_status_msg);
 	 }
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -202,47 +192,6 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		// TODO Auto-generated method stub
 		if(isChecked){
-			switch(buttonView.getId()){
-			case R.id.cb1:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_ON);
-				break;
-			case R.id.cb2:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION2_ON);
-				break;
-			case R.id.cb3:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION3_ON);
-				break;
-			case R.id.cb4:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION4_ON);
-				break;
-			case R.id.cb5:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION5_ON);
-				break;
-			case R.id.cb6:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION6_ON);
-				break;
-			}
-		}else{
-			switch(buttonView.getId()){
-			case R.id.cb1:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION1_OFF);
-				break;
-			case R.id.cb2:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION2_OFF);
-				break;
-			case R.id.cb3:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION3_OFF);
-				break;
-			case R.id.cb4:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION4_OFF);
-				break;
-			case R.id.cb5:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION5_OFF);
-				break;
-			case R.id.cb6:
-				RequestServiceFunction(Common.MessageValueOfService.FUNCTION6_OFF);
-				break;
-			}
 		}
 	};
 	void RequestServiceConnect(String addr,int port){

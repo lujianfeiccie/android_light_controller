@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16.0dip</dimen>
+    <dimen name="activity_vertical_margin">16.0dip</dimen>
+    <dimen name="dialog_height">220.0dip</dimen>
+    <dimen name="dialog_width">310.0dip</dimen>
+    <dimen name="dialog_btn_height">30.0dip</dimen>
+    <dimen name="dialog_btn_width">96.0dip</dimen>
+    <dimen name="dialog_text_size">25.0sp</dimen>
+</resources>

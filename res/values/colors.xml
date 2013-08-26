@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <!-- <color name="window_bg">#fff0f3f6</color>
+         -->
+        <color name="window_bg">#000000</color>
+        <color name="white">#ffffffff</color>
+        <color name="shape_line">#ffcccccc</color>
+</resources>
