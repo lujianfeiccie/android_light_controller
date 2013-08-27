@@ -1,5 +1,8 @@
 package com.lujianfei.icecontroller.ui.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -11,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.widget.Toast;
 
 public class Util
 {
@@ -113,5 +117,29 @@ public class Util
       paramDrawable.draw(localCanvas);
       return localBitmap;
     }
+  }
+  /**
+   * IP是否有效
+   * @param addr
+   * @return
+   */
+  public static boolean isIpValid(String addr){
+	  Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
+		Matcher matcher = pattern.matcher(addr); //以验证127.400.600.2为例
+		if(!matcher.matches()){
+			return false;
+		}
+		return true;
+  }
+  /**
+   * 端口号是否有效
+   * @param port
+   * @return
+   */
+  public static boolean isPortValid(int port){
+	  if(port<=1024 || port>=65535){
+			return false;
+		}
+	  return true;
   }
 }

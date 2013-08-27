@@ -21,7 +21,8 @@
                     />
                 
                  <EditText
-                     style="@style/edittext"/>
+                     style="@style/edittext"
+                     android:id="@+id/edit_ip"/>
             </LinearLayout>
 
             <View
@@ -39,7 +40,8 @@
                     />
                 
                 <EditText
-                     style="@style/edittext"/>
+                     style="@style/edittext"
+                     android:id="@+id/edit_port"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -49,11 +51,12 @@
              android:gravity="right"
              android:padding="10dp" >
              <Button
+                 android:id="@+id/bt_confirm"
                  android:layout_width="fill_parent"
                  android:layout_height="40dp"
                  android:layout_weight="0.93"
                  android:background="@drawable/setting_button"
-                 android:text="确定"
+                 android:text="连接"
                  android:textColor="@color/setting_button" />
          </LinearLayout>
     </LinearLayout>

@@ -2,13 +2,16 @@ package com.lujianfei.icecontroller.exception;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.util.Log;
 
 import com.lujianfei.icecontroller.Common;
+import com.lujianfei.icecontroller.MainActivity;
 import com.lujianfei.icecontroller.model.ConnectionInfo;
+import com.lujianfei.icecontroller.services.SocketConnectionService;
 import com.lujianfei.icecontroller.utilities.SystemHelper;
 
 /*
@@ -107,6 +110,24 @@ public class CrashApplication extends Application {
 		mConnectionInfo.setAddr(sharedata.getString(Common.MessageOfService.IP_ADDRESS, "192.168.1.101"));
 		mConnectionInfo.setPort(sharedata.getInt(Common.MessageOfService.IP_PORT,8888));
 		return mConnectionInfo;
+	}
+	
+	public void SocketConnect(String ip,int port){
+		Intent intent_service = new Intent();
+		intent_service.setClass(this, 
+				SocketConnectionService.class);
+		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_CONNECTION_SERVICE);
+		intent_service.putExtra(Common.MessageOfService.IP_ADDRESS,ip);
+		intent_service.putExtra(Common.MessageOfService.IP_PORT,port);
+		startService(intent_service);
+	}
+	
+	public void SocketDisconnect(){
+		Intent intent_service = new Intent();
+		intent_service.setClass(this, 
+				SocketConnectionService.class);
+		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
+		startService(intent_service);
 	}
 	void log(String msg){
 		Log.d(tag, msg);
