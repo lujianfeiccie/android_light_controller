@@ -129,6 +129,15 @@ public class CrashApplication extends Application {
 		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_DISCONNECTION_SERVICE);
 		startService(intent_service);
 	}
+	
+	public void SocketSend(byte[] data){
+		Intent intent_service = new Intent();
+		intent_service.setClass(this, 
+				SocketConnectionService.class);
+		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.SEND_MESSAGE);
+		intent_service.putExtra(Common.MessageOfService.BYTE_ARRAY,data);
+		startService(intent_service);
+	}
 	void log(String msg){
 		Log.d(tag, msg);
 	}

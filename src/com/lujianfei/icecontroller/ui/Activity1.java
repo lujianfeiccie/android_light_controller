@@ -1,6 +1,5 @@
 package com.lujianfei.icecontroller.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -11,13 +10,14 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.lujianfei.icecontroller.R;
+import com.lujianfei.icecontroller.handler.MyHandler;
 import com.lujianfei.icecontroller.ui.custom.FourKeyButton;
 import com.lujianfei.icecontroller.ui.custom.FourKeyButton.OnFourKeyTouchListener;
 import com.lujianfei.icecontroller.ui.custom.TwoKeyButton;
 import com.lujianfei.icecontroller.ui.others.GlobalData;
 import com.lujianfei.icecontroller.ui.util.Util;
 
-public class Activity1 extends Activity 
+public class Activity1 extends BaseActivity 
 implements OnClickListener,
 					OnFourKeyTouchListener
 {
@@ -35,7 +35,6 @@ implements OnClickListener,
 	  private TwoKeyButton btn_4;
 	  private RelativeLayout rlBtnFourRl;
 	  private FourKeyButton btn_four;
-	  private SettingPopupWindow mPopupWindow;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -60,8 +59,6 @@ implements OnClickListener,
 		      setSize();
 		      findView();
 		      initData();
-		    
-		      mPopupWindow = new SettingPopupWindow(this);
 	}
 	 private void initData() {
 		// TODO Auto-generated method stub
@@ -148,27 +145,27 @@ implements OnClickListener,
 	@Override
 	public void onDownKeyTouch(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
-		
+		mApp.SocketSend("onDownKeyTouch".getBytes());
 	}
 	@Override
 	public void onKeyTouchEnd(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
-		
+		mApp.SocketSend("onKeyTouchEnd".getBytes());
 	}
 	@Override
 	public void onLeftKeyTouch(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
-		
+		mApp.SocketSend("onLeftKeyTouch".getBytes());
 	}
 	@Override
 	public void onRightKeyTouch(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
-		
+		mApp.SocketSend("onRightKeyTouch".getBytes());
 	}
 	@Override
 	public void onUpKeyTouch(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
-		
+		mApp.SocketSend("onUpKeyTouch".getBytes());
 	}
 	
 	@Override
@@ -177,34 +174,40 @@ implements OnClickListener,
 		switch (v.getId()) {
 		case R.id.btn_on:
 			log("btn_on");
+			mApp.SocketSend("btn_on".getBytes());
 			//Toast.makeText(this, "btn_on", 200).show()
 			break;
 		case R.id.btn_off:
 			log("btn_off");
+			mApp.SocketSend("btn_off".getBytes());
 			break;
 		case R.id.btn_w:
 			log("btn_w");
+			mApp.SocketSend("btn_w".getBytes());
 			break;
 		case R.id.btn_home:
 			log("btn_home");
-			View view = findViewById(R.id.btn_home);
-			mPopupWindow.getWindow().showAsDropDown(view, Util.DipToPixels(this, -30),Util.DipToPixels(this, 20));
+			showSettingDialog();
 			break;
 		case R.id.btn_1:
 			btn_1.toggle();
 			log(""+btn_1.isStateOn());
+			mApp.SocketSend(String.format("btn_1 %s",btn_1.isStateOn()).getBytes());
 			break;
 		case R.id.btn_2:
 			btn_2.toggle();
 			log(""+btn_2.isStateOn());
+			mApp.SocketSend(String.format("btn_2 %s",btn_2.isStateOn()).getBytes());
 			break;
 		case R.id.btn_3:
 			btn_3.toggle();
 			log(""+btn_3.isStateOn());
+			mApp.SocketSend(String.format("btn_3 %s",btn_3.isStateOn()).getBytes());
 			break;
 		case R.id.btn_4:
 			btn_4.toggle();
 			log(""+btn_4.isStateOn());
+			mApp.SocketSend(String.format("btn_4 %s",btn_4.isStateOn()).getBytes());
 			break;
 		default:
 			break;

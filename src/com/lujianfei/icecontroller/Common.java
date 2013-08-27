@@ -55,6 +55,10 @@ public class Common {
 		 * 请求打开文件名
 		 */
 		public static final String FILE_NAME= "FILE_NAME";
+		/**
+		 * 请求发送字节数组
+		 */
+		public static final String BYTE_ARRAY= "BYTE_ARRAY";
 	}
 	
 	public static class MessageValueOfService{
@@ -70,23 +74,7 @@ public class Common {
 		/**
 		 * 功能
 		 */
-		public static final String FUNCTION1_ON= "FUNCTION1_ON";
-		public static final String FUNCTION1_OFF= "FUNCTION1_OFF";
-		
-		public static final String FUNCTION2_ON = "FUNCTION2_ON";
-		public static final String FUNCTION2_OFF = "FUNCTION2_OFF";
-		
-		public static final String FUNCTION3_ON = "FUNCTION3_ON";
-		public static final String FUNCTION3_OFF = "FUNCTION3_OFF";
-		
-		public static final String FUNCTION4_ON = "FUNCTION4_ON";
-		public static final String FUNCTION4_OFF = "FUNCTION4_OFF";
-		
-		public static final String FUNCTION5_ON = "FUNCTION5_ON";
-		public static final String FUNCTION5_OFF = "FUNCTION5_OFF";
-		
-		public static final String FUNCTION6_ON = "FUNCTION6_ON";
-		public static final String FUNCTION6_OFF = "FUNCTION6_OFF";
+		public static final String SEND_MESSAGE= "SEND_MESSAGE";
 		/**
 		 * 连接状态查询
 		 */

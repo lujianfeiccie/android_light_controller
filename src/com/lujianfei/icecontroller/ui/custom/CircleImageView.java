@@ -187,6 +187,21 @@ public class CircleImageView extends RelativeLayout
 	    float x = paramMotionEvent.getX();
 	    float y = paramMotionEvent.getY();
 	    update(x,y);
+	    
+	    switch (paramMotionEvent.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			change.onTouchDown(this);
+			break;
+		case MotionEvent.ACTION_MOVE:
+			change.onTouchMove(this);
+			break;
+		case MotionEvent.ACTION_UP:
+			change.onTouchUp(this);
+			break;
+
+		default:
+			break;
+		}
     return bool;
   }
 

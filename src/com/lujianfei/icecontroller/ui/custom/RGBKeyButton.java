@@ -6,9 +6,9 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 public class RGBKeyButton extends Button {
-	private boolean rgbMode = false;
+	private boolean rgbMode = true;
 	private int mode = 1;
-	private int currentMode = 1;
+	private int currentMode = 0;
 	public static final int MODE_RGB = 0;
 	public static final int MODE_R = 1;
 	public static final int MODE_G = 2;

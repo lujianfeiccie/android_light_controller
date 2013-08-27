@@ -14,10 +14,8 @@ import android.os.Message;
 import android.util.Log;
 
 import com.lujianfei.icecontroller.Common;
-import com.lujianfei.icecontroller.MyFunction;
 import com.lujianfei.icecontroller.Protocol;
 import com.lujianfei.icecontroller.exception.CrashApplication;
-import com.lujianfei.icecontroller.ifunction.IFunction;
 import com.lujianfei.icecontroller.socket.IpAddress;
 import com.lujianfei.icecontroller.socket.TcpConnection;
 import com.lujianfei.icecontroller.socket.TcpConnectionListener;
@@ -58,7 +56,6 @@ public class SocketConnectionService extends Service {
 	
 	CrashApplication myApp = null;
 	
-	IFunction function = null;
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -67,7 +64,6 @@ public class SocketConnectionService extends Service {
 		
 		myApp = (CrashApplication)CrashApplication.getContext();
 		_TcpConnection = null;
-		function = new MyFunction();
 	}
 	@Override
 	public void onStart(Intent intent, int startId) {
@@ -123,8 +119,8 @@ public class SocketConnectionService extends Service {
 				}
 				myApp.setConnecting(false);
 			} else if(msg_request.equals(Common.MessageValueOfService.FUNCTION_STATUS)){
-				log("LAUNCH_TCP_DISCONNECTION_SERVICE");
-				//关闭蓝牙连接
+				log("FUNCTION_STATUS");
+				//获取状态
 				if(_TcpConnection!=null && _TcpConnection.isRunning()){
 					if (myApp.getHandler() != null) {
 						Message handler_msg = new Message();
@@ -144,20 +140,17 @@ public class SocketConnectionService extends Service {
 					}
 					myApp.setConnecting(false);
 				}
-			} else{
+			} else if(msg_request.equals(Common.MessageValueOfService.SEND_MESSAGE)){
+				log("SEND_MESSAGE");
 				if(_TcpConnection!=null && _TcpConnection.isRunning()){
-					log("FUNCTION1");
-					byte[] data = ((MyFunction)function).parseFunction(msg_request);
-					if(data==null) return;
-					try {
-						_TcpConnection.send(data);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						if (myApp.getHandler() != null) {
-							myApp.getHandler().sendEmptyMessage(
-									Common.UI_SEND_IOEXCEPTION);
+					byte[] data = msg.getByteArray(Common.MessageOfService.BYTE_ARRAY);
+					if(data!=null){
+						try {
+							_TcpConnection.send(data);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-						log(""+e.getMessage());
 					}
 				}
 			}// end of msg_request.equals(Common.MessageValueOfService.LAUNCH_BT_CONNECTION_SERVICE)
@@ -173,6 +166,7 @@ public class SocketConnectionService extends Service {
 			myApp.setIp_addr(ip);
 			myApp.setPort(port);
 			myApp.setConnecting(true);
+			myApp.saveConnectionInfo(ip, port);
 			myApp.getHandler().sendEmptyMessage(Common.UI_CONNECT_SUCCESFULLY);
 		}
 

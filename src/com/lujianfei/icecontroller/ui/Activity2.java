@@ -1,6 +1,5 @@
 package com.lujianfei.icecontroller.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,7 +17,7 @@ import com.lujianfei.icecontroller.ui.custom.TwoKeyButton;
 import com.lujianfei.icecontroller.ui.others.GlobalData;
 import com.lujianfei.icecontroller.ui.util.Util;
 
-public class Activity2 extends Activity implements OnClickListener,OnCircleImageViewChangeListener
+public class Activity2 extends BaseActivity implements OnClickListener,OnCircleImageViewChangeListener
 {
 	private String tag = getClass().getSimpleName();
 	  public DisplayMetrics displayMetrics;
@@ -36,7 +35,7 @@ public class Activity2 extends Activity implements OnClickListener,OnCircleImage
 	  private RGBKeyButton btn_rgb;
 	  private CircleImageView circleImageView;
 	  private RelativeLayout circleImageViewRl;
-	  private SettingPopupWindow mPopupWindow;
+	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -61,7 +60,6 @@ public class Activity2 extends Activity implements OnClickListener,OnCircleImage
 		      setSize();
 		      findView();
 		    //  initData();
-		      mPopupWindow = new SettingPopupWindow(this);
 	}
 	 private void findView() {
 		// TODO Auto-generated method stub
@@ -166,51 +164,62 @@ public class Activity2 extends Activity implements OnClickListener,OnCircleImage
 		// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.btn_home:
-				View view = findViewById(R.id.btn_home);
-				mPopupWindow.getWindow().showAsDropDown(view, Util.DipToPixels(this, -30),Util.DipToPixels(this, 20));
+				showSettingDialog();
 				break;
 			case R.id.btn_1:
 				btn_1.toggle();
 				log(""+btn_1.isStateOn());
+				mApp.SocketSend(String.format("btn_1 %s",btn_1.isStateOn()).getBytes());
 				break;
 			case R.id.btn_2:
 				btn_2.toggle();
 				log(""+btn_2.isStateOn());
+				mApp.SocketSend(String.format("btn_2 %s",btn_2.isStateOn()).getBytes());
 				break;
 			case R.id.btn_3:
 				btn_3.toggle();
 				log(""+btn_3.isStateOn());
+				mApp.SocketSend(String.format("btn_3 %s",btn_3.isStateOn()).getBytes());
 				break;
 			case R.id.btn_4:
 				btn_4.toggle();
 				log(""+btn_4.isStateOn());
+				mApp.SocketSend(String.format("btn_4 %s",btn_4.isStateOn()).getBytes());
 				break;
 			case R.id.btn_bright_down:
 				log("btn_bright_down");
+				mApp.SocketSend("btn_bright_down".getBytes());
 				break;
 			case R.id.btn_bright_up:
 				log("btn_bright_up");
+				mApp.SocketSend("btn_bright_up".getBytes());
 				break;
 			case R.id.btn_off:
 				log("btn_off");
+				mApp.SocketSend("btn_off".getBytes());
 				break;
 			case R.id.btn_on:
 				log("btn_on");
+				mApp.SocketSend("btn_on".getBytes());
 				break;
 			case R.id.btn_rgb:
 				btn_rgb.toggle();
 				switch(btn_rgb.getMode()){
 				case RGBKeyButton.MODE_RGB:
 					log("MODE_RGB");
+					mApp.SocketSend("MODE_RGB".getBytes());
 					break;
 				case RGBKeyButton.MODE_R:
 					log("MODE_R");
+					mApp.SocketSend("MODE_R".getBytes());
 					break;
 				case RGBKeyButton.MODE_G:
 					log("MODE_G");
+					mApp.SocketSend("MODE_G".getBytes());
 					break;
 				case RGBKeyButton.MODE_B:
 					log("MODE_B");
+					mApp.SocketSend("MODE_B".getBytes());
 					break;
 				}
 				break;
@@ -218,12 +227,6 @@ public class Activity2 extends Activity implements OnClickListener,OnCircleImage
 				break;
 			}
 	}
-	/*	  private Button btn_bright_down;
-	  private Button btn_bright_up;
-	  private Button btn_home;
-	  private Button btn_off;
-	  private Button btn_on;
-	  private Button btn_rgb;*/
 	@Override
 	public void onTouchDown(CircleImageView paramCircleImageView) {
 		// TODO Auto-generated method stub
@@ -237,6 +240,14 @@ public class Activity2 extends Activity implements OnClickListener,OnCircleImage
 	@Override
 	public void onTouchUp(CircleImageView paramCircleImageView) {
 		// TODO Auto-generated method stub
-		
+		if(btn_rgb.isRgbMode()){
+			int[] data = paramCircleImageView.getRGB();
+			mApp.SocketSend(String.format("RGB(%s %s %s)",data[0],data[1],data[2]).getBytes());
+		}
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 	}
 }

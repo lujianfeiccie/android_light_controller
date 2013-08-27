@@ -15,7 +15,7 @@ import com.lujianfei.icecontroller.ui.custom.TwoKeyButton;
 import com.lujianfei.icecontroller.ui.others.GlobalData;
 import com.lujianfei.icecontroller.ui.util.Util;
 
-public class Activity3 extends Activity implements OnClickListener
+public class Activity3 extends BaseActivity implements OnClickListener
 {
 	private String tag = getClass().getSimpleName();
 	public DisplayMetrics displayMetrics;
@@ -39,7 +39,6 @@ public class Activity3 extends Activity implements OnClickListener
 	  private Button btn_sleep;
 	  private Button btn_timer;
 	  private LinearLayout menuLl;
-	  private SettingPopupWindow mPopupWindow;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -64,7 +63,6 @@ public class Activity3 extends Activity implements OnClickListener
 		      setSize();
 		      findView();
 		    //  initData();
-		      mPopupWindow = new SettingPopupWindow(this);
 	}
 	private void findView() {
 		// TODO Auto-generated method stub
@@ -174,58 +172,71 @@ public class Activity3 extends Activity implements OnClickListener
 		switch (v.getId()) {
 		case R.id.btn_on:
 			log("btn_on");
-			//Toast.makeText(this, "btn_on", 200).show()
+			mApp.SocketSend("btn_on".getBytes());
 			break;
 		case R.id.btn_off:
 			log("btn_off");
+			mApp.SocketSend("btn_off".getBytes());
 			break;
 		case R.id.btn_w:
 			log("btn_w");
+			mApp.SocketSend("btn_w".getBytes());
 			break;
 		case R.id.btn_home:
 			log("btn_home");
-			View view = findViewById(R.id.btn_home);
-			mPopupWindow.getWindow().showAsDropDown(view, Util.DipToPixels(this, -30),Util.DipToPixels(this, 20));
+			showSettingDialog();
 			break;
 		case R.id.btn_1:
 			btn_1.toggle();
 			log(""+btn_1.isStateOn());
+			mApp.SocketSend(String.format("btn_1 %s",btn_1.isStateOn()).getBytes());
 			break;
 		case R.id.btn_2:
 			btn_2.toggle();
 			log(""+btn_2.isStateOn());
+			mApp.SocketSend(String.format("btn_2 %s",btn_2.isStateOn()).getBytes());
 			break;
 		case R.id.btn_3:
 			btn_3.toggle();
 			log(""+btn_3.isStateOn());
+			mApp.SocketSend(String.format("btn_3 %s",btn_3.isStateOn()).getBytes());
 			break;
 		case R.id.btn_4:
 			btn_4.toggle();
 			log(""+btn_4.isStateOn());
+			mApp.SocketSend(String.format("btn_4 %s",btn_4.isStateOn()).getBytes());
 			break;
 		case R.id.btn_meeting:
 			log("btn_meeting");
+			mApp.SocketSend("btn_meeting".getBytes());
 			break;
 		case R.id.btn_alarm:
 			log("btn_alarm");
+			mApp.SocketSend("btn_alarm".getBytes());
 			break;
 		case R.id.btn_mode:
 			log("btn_mode");
+			mApp.SocketSend("btn_mode".getBytes());
 			break;
 		case R.id.btn_night:
 			log("btn_night");
+			mApp.SocketSend("btn_night".getBytes());
 			break;
 		case R.id.btn_reading:
 			log("btn_reading");
+			mApp.SocketSend("btn_reading".getBytes());
 			break;
 		case R.id.btn_recreation:
 			log("btn_recreation");
+			mApp.SocketSend("btn_recreation".getBytes());
 			break;
 		case R.id.btn_sleep:
 			log("btn_sleep");
+			mApp.SocketSend("btn_sleep".getBytes());
 			break;
 		case R.id.btn_timer:
 			log("btn_timer");
+			mApp.SocketSend("btn_timer".getBytes());
 			break;
 		default:
 			break;

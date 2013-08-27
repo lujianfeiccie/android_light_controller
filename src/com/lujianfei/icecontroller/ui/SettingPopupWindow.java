@@ -1,9 +1,7 @@
 package com.lujianfei.icecontroller.ui;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,18 +19,35 @@ public class SettingPopupWindow implements OnClickListener{
 	private Activity activity;
 	private PopupWindow window;  
 	private EditText edit_ip,edit_port; 
+
 	private Button bt_confirm;
-	private boolean connecting = false;
 	CrashApplication mApp = null;
-	public PopupWindow getWindow() {
-		return window;
-	}
+	ProgressDialog dlg = null;
 	public SettingPopupWindow(Activity activity){
 		this.activity = activity;
 		this.window = makePopupWindow();
 		mApp  = (CrashApplication) CrashApplication.getContext();
 	}
-    private PopupWindow makePopupWindow()  
+	public void setIp(String ip) {
+		this.edit_ip.setText(ip);
+	}
+
+	public void setPort(int port) {
+		this.edit_port.setText(""+port);
+	}
+	
+	public void updateControl(){
+		if(mApp.isConnecting()){
+			bt_confirm.setText("断开");
+		}else{
+			bt_confirm.setText("连接");
+		}
+	}
+	public PopupWindow getWindow() {
+		return window;
+	}
+	
+    private  PopupWindow makePopupWindow()  
     {  
     	PopupWindow window;  
         window = new PopupWindow(activity);  
@@ -55,36 +70,42 @@ public class SettingPopupWindow implements OnClickListener{
 		switch(v.getId()){
 		case R.id.bt_confirm:
 		{
-			if(connecting){
-				bt_confirm.setText("连接");
-				edit_ip.setEnabled(true);
-				edit_port.setEnabled(true);
-				connecting = false;
-			}else{
-				
-				if(!checkValid(edit_ip.getText().toString(),Integer.parseInt(edit_port.getText().toString()),activity)){
-					return;
-				}
-				bt_confirm.setText("断开");
-				edit_ip.setEnabled(false);
-				edit_port.setEnabled(false);
-				connecting = true;
+			int port = 0;
+			try {
+				port =Integer.parseInt(edit_port.getText().toString());
+			} catch (Exception e) {
+				// TODO: handle exception
+				port = 0;
 			}
-		}
+			String ip = edit_ip.getText().toString();
+			
+			final String t_ip = ip;
+			final int t_port = port;
+			if(!mApp.isConnecting()){
+				activity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+							if(!Util.isIpValid(t_ip)){
+								showToast("IP输入有误!");
+								return;
+							}
+							else if(!Util.isPortValid(t_port)){
+								showToast("端口输入有误!");
+								return;
+							}
+							mApp.SocketConnect(t_ip, t_port);
+					}
+				});
+			}else{
+				mApp.SocketDisconnect();
+			}
+			window.dismiss();
+		}	
 			break;
 		}
 	}  
-    boolean checkValid(String addr,int port,Activity activity){
-    	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
-		Matcher matcher = pattern.matcher(addr); //以验证127.400.600.2为例
-		if(!matcher.matches()){
-			Toast.makeText(activity, "请输入正确的IP地址", 200).show();
-			return false;
-		}
-		if(port<=1024 || port>=65535){
-			Toast.makeText(activity, "请输入正确范围的端口号(1024,65535)", 200).show();
-			return false;
-		}
-		return true;
-    }
+	void showToast(String msg){
+		Toast.makeText(activity, msg, 200).show();
+	}
 }

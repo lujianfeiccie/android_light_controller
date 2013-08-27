@@ -23,7 +23,7 @@ public class FourKeyButton extends Button
   private Drawable rightBitmap;
   private Drawable upBitmap;
   private int width;
-
+  private boolean down = false;
   public FourKeyButton(Context paramContext)
   {
     super(paramContext);
@@ -120,38 +120,54 @@ public class FourKeyButton extends Button
     }
     float x = paramMotionEvent.getX();
     float y = paramMotionEvent.getY();
-    if(isInrange(x,y)){
-    	float horizontalY_start = (float)height/4.0f;
-    	float horizontalY_end = (float)height*3.0f/4.0f;
-    	float verticalX_start = (float)width/4.0f;
-    	float verticalX_end = (float)width*3.0f/4.0f;
-    	if((x> verticalX_start && x < verticalX_end) &&
-    		(y>0 && y< (height/4.0f))){
-    		log("up");
-    		setBackgroundDrawable(upBitmap);
-    		keyTouchListener.onUpKeyTouch(this);
-    	}else if((x> verticalX_start && x < verticalX_end) &&
-        		(y>(height * 3.0f/4.0f) && y< height)){
-    		log("down");
-    		setBackgroundDrawable(downBitmap);
-    		keyTouchListener.onDownKeyTouch(this);
-    	}else if((y> horizontalY_start && y < horizontalY_end) &&
-        		(x>0 && x< (width / 4.0f))){
-    		log("left");
-    		setBackgroundDrawable(leftBitmap);
-    		keyTouchListener.onLeftKeyTouch(this);
-    	}else if((y> horizontalY_start && y < horizontalY_end) &&
-        		(x>(width*3.0f/4.0f) && x< width)){
-    		log("right");
-    		setBackgroundDrawable(rightBitmap);
-    		keyTouchListener.onRightKeyTouch(this);
-    	}
-    }else{
-    	log("isOut");
-    }
+    
+    switch (paramMotionEvent.getAction()) {
+	case MotionEvent.ACTION_DOWN:
+		down = true;
+		break;
+	case MotionEvent.ACTION_UP:
+		if(down){
+			doHandle(x,y);
+			down = false;
+		}
+		break;
+	default:
+		break;
+	}
+  
     return true;
   }
-
+ void doHandle(float x,float y){
+	  if(isInrange(x,y)){
+	    	float horizontalY_start = (float)height/4.0f;
+	    	float horizontalY_end = (float)height*3.0f/4.0f;
+	    	float verticalX_start = (float)width/4.0f;
+	    	float verticalX_end = (float)width*3.0f/4.0f;
+	    	if((x> verticalX_start && x < verticalX_end) &&
+	    		(y>0 && y< (height/4.0f))){
+	    		log("up");
+	    		setBackgroundDrawable(upBitmap);
+	    		keyTouchListener.onUpKeyTouch(this);
+	    	}else if((x> verticalX_start && x < verticalX_end) &&
+	        		(y>(height * 3.0f/4.0f) && y< height)){
+	    		log("down");
+	    		setBackgroundDrawable(downBitmap);
+	    		keyTouchListener.onDownKeyTouch(this);
+	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
+	        		(x>0 && x< (width / 4.0f))){
+	    		log("left");
+	    		setBackgroundDrawable(leftBitmap);
+	    		keyTouchListener.onLeftKeyTouch(this);
+	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
+	        		(x>(width*3.0f/4.0f) && x< width)){
+	    		log("right");
+	    		setBackgroundDrawable(rightBitmap);
+	    		keyTouchListener.onRightKeyTouch(this);
+	    	}
+	    }else{
+	    	log("isOut");
+	    }
+ }
   public void setOnFourKeyTouchListener(OnFourKeyTouchListener paramOnFourKeyTouchListener)
   {
     this.keyTouchListener = paramOnFourKeyTouchListener;
