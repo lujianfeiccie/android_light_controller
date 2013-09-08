@@ -1,328 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+        android:background="@drawable/back">
+<include layout="@layout/title_bar2"/>
+<LinearLayout
+        style="@style/layout_top">
 
-    <ImageView
-        android:id="@id/imageView1"
-        android:layout_width="fill_parent"
-        android:layout_height="40.0dip"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/title_back"
-        android:visibility="visible" />
+        <Button
+            android:id="@id/btn_on"
+            style="@style/layout_top_button"
+                 android:layout_marginRight="20dp"
+            android:background="@drawable/btn_on_background" />
 
-    <ImageView
-        android:id="@id/imageView2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/imageView1"
-        android:scaleType="fitXY"
-        android:src="@drawable/back" />
-
-    <Button
-        android:id="@id/btn_home"
-        android:layout_width="50.0dip"
-        android:layout_height="30.0dip"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="60.0dip"
-        android:layout_marginTop="5.0dip"
-        android:background="@drawable/btn_home_background"
-        android:visibility="visible" />
-
-    <ImageView
-        android:id="@id/imageView3"
-        android:layout_width="80.0dip"
-        android:layout_height="30.0dip"
-        android:layout_alignTop="@id/btn_home"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@id/username"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/btn_home"
-        android:layout_alignBottom="@id/btn_home"
-        android:layout_marginLeft="35.0dip"
-        android:layout_marginRight="5.0dip"
-        android:layout_toRightOf="@id/imageView3"
-        android:singleLine="true"
-        android:textColor="@android:color/white"
-        android:visibility="visible" />
-
-    <TextView
-        android:id="@id/tv"
-        android:layout_width="1.0dip"
-        android:layout_height="1.0dip"
-        android:layout_centerInParent="true" />
-
-    <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
-        android:id="@id/btn_1"
-        android:layout_width="52.0dip"
-        android:layout_height="115.0dip"
-        android:layout_alignLeft="@id/menu_ll"
-        android:layout_below="@id/menu_ll"
-        android:layout_marginTop="0.0dip"
-        offBackground="@drawable/one_1_down"
-        normalBackground="@drawable/one_1"
-        onBackground="@drawable/one_1_up" />
-
-    <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
-        android:id="@id/btn_2"
-        android:layout_width="52.0dip"
-        android:layout_height="115.0dip"
-        android:layout_below="@id/menu_ll"
-        android:layout_marginLeft="25.0dip"
-        android:layout_marginTop="30.0dip"
-        android:layout_toRightOf="@id/btn_1"
-        offBackground="@drawable/one_2_down"
-        normalBackground="@drawable/one_2"
-        onBackground="@drawable/one_2_up" />
-
-    <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
-        android:id="@id/btn_3"
-        android:layout_width="52.0dip"
-        android:layout_height="115.0dip"
-        android:layout_below="@id/menu_ll"
-        android:layout_marginRight="25.0dip"
-        android:layout_marginTop="30.0dip"
-        android:layout_toLeftOf="@id/btn_4"
-        offBackground="@drawable/one_3_down"
-        normalBackground="@drawable/one_3"
-        onBackground="@drawable/one_3_up" />
-
-    <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
-        android:id="@id/btn_4"
-        android:layout_width="52.0dip"
-        android:layout_height="115.0dip"
-        android:layout_alignRight="@id/menu_ll"
-        android:layout_below="@id/menu_ll"
-        android:layout_marginRight="0.0dip"
-        android:layout_marginTop="0.0dip"
-        offBackground="@drawable/one_4_down"
-        normalBackground="@drawable/one_4"
-        onBackground="@drawable/one_4_up" />
-
-    <Button
-        android:id="@id/btn_off"
-        android:layout_width="90.0dip"
-        android:layout_height="40.0dip"
-        android:layout_alignBaseline="@id/btn_on"
-        android:layout_alignRight="@id/menu_ll"
-        android:layout_marginRight="0.0dip"
-        android:background="@drawable/btn_off_background" />
+        <Button
+            android:id="@id/btn_off"
+       style="@style/layout_top_button"
+                 android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_off_background" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@id/menu_ll"
-        android:layout_width="280.0dip"
-        android:layout_height="250.0dip"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120.0dip"
-        android:orientation="vertical" >
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:layout_marginTop="20dp"
+        android:gravity="center">
 
+        <!-- 第一排 -->
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.0dip"
-            android:layout_weight="1.0"
-            android:orientation="horizontal" >
-
+        style="@style/layout_row"
+            >
+            <!-- 第一个 -->
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
-
+              	style="@style/layout_button">
                 <Button
                     android:id="@id/btn_night"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+             		style="@style/activity3_button"
                     android:background="@drawable/btn_night_background" />
-
                 <TextView
                     android:id="@id/tv_night"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                      style="@style/activity3_textview"
                     android:text="Night"
-                    android:textColor="#ffffffff" />
+                    />
             </LinearLayout>
-
+			<!-- 第二个 -->
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
+                style="@style/layout_button">
 
                 <Button
                     android:id="@id/btn_meeting"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+             	style="@style/activity3_button"
                     android:background="@drawable/btn_meeting_background" />
 
                 <TextView
                     android:id="@id/tv_meeting"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                style="@style/activity3_textview"
                     android:text="Meeting"
-                    android:textColor="#ffffffff" />
+                    />
             </LinearLayout>
-
+			<!-- 第三个 -->
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
+                style="@style/layout_button" >
 
                 <Button
                     android:id="@id/btn_reading"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+                    	style="@style/activity3_button"
                     android:background="@drawable/btn_reading_background" />
 
                 <TextView
                     android:id="@id/tv_reading"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    style="@style/activity3_textview"
                     android:text="Reading"
-                    android:textColor="#ffffffff" />
+                    />
             </LinearLayout>
-
+			<!-- 第四个 -->
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
+               style="@style/layout_button">
 
                 <Button
                     android:id="@id/btn_mode"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+                    	style="@style/activity3_button"
                     android:background="@drawable/btn_mode_background" />
 
                 <TextView
                     android:id="@id/tv_mode"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    style="@style/activity3_textview"
                     android:text="Mode"
-                    android:textColor="#ffffffff" />
+                    />
             </LinearLayout>
         </LinearLayout>
-
+	  <!-- 第二排 -->
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.0dip"
-            android:layout_weight="1.0"
-            android:orientation="horizontal" >
+            style="@style/layout_row" >
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
+               style="@style/layout_button">
 
                 <Button
                     android:id="@id/btn_timer"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+                 	style="@style/activity3_button"
                     android:background="@drawable/btn_timer_background" />
 
                 <TextView
                     android:id="@id/tv_timer"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    style="@style/activity3_textview"
                     android:text="Timer"
-                    android:textColor="#ffffffff" />
+                    />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
+               style="@style/layout_button">
 
                 <Button
                     android:id="@id/btn_alarm"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+                style="@style/activity3_button"
                     android:background="@drawable/btn_alarm_background" />
 
                 <TextView
                     android:id="@id/tv_alarm"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    style="@style/activity3_textview"
                     android:text="Alarm"
-                    android:textColor="#ffffffff" />
+                  />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
+                style="@style/layout_button" >
 
                 <Button
                     android:id="@id/btn_sleep"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+                 style="@style/activity3_button"
                     android:background="@drawable/btn_sleep_background" />
 
                 <TextView
                     android:id="@id/tv_sleep"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    style="@style/activity3_textview"
                     android:text="Sleep"
-                    android:textColor="#ffffffff" />
+                    />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:orientation="vertical" >
+                style="@style/layout_button">
 
                 <Button
                     android:id="@id/btn_recreation"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5.0dip"
+                  style="@style/activity3_button"
                     android:background="@drawable/btn_recreation_background" />
 
                 <TextView
                     android:id="@id/tv_recreation"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    style="@style/activity3_textview"
                     android:text="Recreation"
-                    android:textColor="#ffffffff" />
+                    />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@id/btn_on"
-        android:layout_width="90.0dip"
-        android:layout_height="40.0dip"
-        android:layout_alignLeft="@id/menu_ll"
-        android:layout_marginTop="60.0dip"
-        android:background="@drawable/btn_on_background" />
+ <!-- 四个开关按钮 -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6dp"
+            android:gravity="top|center"
+            android:orientation="horizontal" >
 
-</RelativeLayout>
+             <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_1"
+            	style="@style/layout_four_toggle_button_1"
+                normalBackground="@drawable/one_1"
+                offBackground="@drawable/one_1_down"
+                onBackground="@drawable/one_1_up" />
+
+            <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_2"
+             style="@style/layout_four_toggle_button_2"
+                normalBackground="@drawable/one_2"
+                offBackground="@drawable/one_2_down"
+                onBackground="@drawable/one_2_up" />
+
+            <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_3"
+             style="@style/layout_four_toggle_button_3"
+                normalBackground="@drawable/one_3"
+                offBackground="@drawable/one_3_down"
+                onBackground="@drawable/one_3_up" />
+
+            <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_4"
+               style="@style/layout_four_toggle_button_4"
+                normalBackground="@drawable/one_4"
+                offBackground="@drawable/one_4_down"
+                onBackground="@drawable/one_4_up" />
+        </LinearLayout>
+</LinearLayout>

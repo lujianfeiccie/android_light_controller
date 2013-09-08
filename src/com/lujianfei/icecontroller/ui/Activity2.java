@@ -41,7 +41,7 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 		log("onCreate");
 		      setContentView(R.layout.activity2);
 		    GlobalData.activity2 = this;
-		      findView();
+		     findView();
 		    //  initData();
 	}
 	 private void findView() {

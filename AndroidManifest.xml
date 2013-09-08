@@ -25,7 +25,6 @@
         android:debuggable="true"
         android:persistent="true"
         >
-        <!-- ||||||||||| For the SmartCar ||||||||||||||||||||||-->
         <activity
             android:name=".ui.ContainerGroup"
             android:configChanges="orientation"
@@ -37,9 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Activity3" android:screenOrientation="portrait" />
+       <activity android:name=".ui.Activity3" android:screenOrientation="portrait" />
         <activity android:name=".ui.Activity2" android:screenOrientation="portrait" />
-        <activity android:name=".ui.Activity1" android:screenOrientation="portrait" />
+         <activity android:name=".ui.Activity1" android:screenOrientation="portrait" />
         <service 
             android:name=".services.SocketConnectionService">
         </service>
