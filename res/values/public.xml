@@ -53,7 +53,6 @@
     <public type="drawable" name="hi_no" id="0x7f020034" />
     <public type="drawable" name="hi_yes" id="0x7f020035" />
     <public type="drawable" name="home" id="0x7f020036" />
-    <public type="drawable" name="ic_launcher" id="0x7f020037" />
     <public type="drawable" name="icon" id="0x7f020038" />
     <public type="drawable" name="logo" id="0x7f020039" />
     <public type="drawable" name="meeting" id="0x7f02003a" />

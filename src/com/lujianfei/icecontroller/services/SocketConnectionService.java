@@ -184,35 +184,6 @@ public class SocketConnectionService extends Service {
 		@Override
 		public void onReceivedData(TcpConnection tcp_conn, byte[] buffer, int len) {
 			// TODO Auto-generated method stub
-			for(int startIndex=0; startIndex<len; ++startIndex){
-				if(buffer[startIndex] != (byte)0x0a){
-					continue;
-				}
-				byte checkSum = 0x00;
-	        	int dataLength = buffer[2 + startIndex];
-	    	
-    	        for(int i=1;i<(3+dataLength);i++){
-    	        	checkSum += buffer[i+startIndex];
-    	        }
-    	    	if(dataLength < 0){
-            		continue;
-    	        }
-	    	
-	        	if(checkSum == buffer[3 + dataLength + startIndex]){
-	    	    /**
-	    		 * Checksum ok!
-	    		 */
-	        		switch(buffer[Protocol.FLAG_CONTROL]){
-	        		case Protocol.FLAG_FILE_LIST:
-	        			break;
-	        		}
-	    	    startIndex += (dataLength + 3);
-	        	}else{
-	    		/**
-	    		 * Checksum error!
-	    		 */
-	        	}
-			}
 		}
 		public String bytesToHexString(byte[] src){  
 		    StringBuilder stringBuilder = new StringBuilder("");  

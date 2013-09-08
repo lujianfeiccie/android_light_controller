@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.lujianfei.icecontroller.Protocol;
 import com.lujianfei.icecontroller.R;
 import com.lujianfei.icecontroller.handler.MyHandler;
 import com.lujianfei.icecontroller.ui.custom.FourKeyButton;
@@ -60,27 +61,6 @@ implements OnClickListener,
 	    this.btn_four.setOnFourKeyTouchListener(this);
 	    this.btn_w = ((Button)findViewById(R.id.btn_w));
 	    this.btn_w.setOnClickListener(this);
-//	    ViewGroup.LayoutParams localLayoutParams1 = this.btn_on.getLayoutParams();
-//	    localLayoutParams1.height = (96 * this.heightPx / 1240);
-//	    localLayoutParams1.width = (211 * this.widthPx / 826);
-//	    this.btn_on.setLayoutParams(localLayoutParams1);
-//	    this.btn_on.setPadding(this.btn_on.getPaddingLeft(), 113 * this.heightPx / 1240, this.btn_on.getPaddingRight(), this.btn_on.getPaddingBottom());
-//	    this.btn_on.invalidate();
-//	    ViewGroup.LayoutParams localLayoutParams2 = this.btn_off.getLayoutParams();
-//	    localLayoutParams2.height = (96 * this.heightPx / 1240);
-//	    localLayoutParams2.width = (211 * this.widthPx / 826);
-//	    this.btn_off.setPadding(this.btn_off.getPaddingLeft(), 113 * this.heightPx / 1240, this.btn_off.getPaddingRight(), this.btn_off.getPaddingBottom());
-//	    this.btn_off.setLayoutParams(localLayoutParams2);
-//	    this.btn_off.invalidate();
-//	    ViewGroup.LayoutParams localLayoutParams3 = this.rlBtnFourRl.getLayoutParams();
-//	    localLayoutParams3.height = (570 * this.heightPx / 1240);
-//	    localLayoutParams3.width = (570 * this.heightPx / 1240);
-//	    this.rlBtnFourRl.invalidate();
-//	    ViewGroup.LayoutParams localLayoutParams4 = this.btn_four.getLayoutParams();
-//	    localLayoutParams4.height = (570 * this.heightPx / 1240);
-//	    localLayoutParams4.width = (570 * this.heightPx / 1240);
-//	    this.btn_four.setLayoutParams(localLayoutParams4);
-//	    this.btn_four.invalidate();
 	    this.btn_w.invalidate();
 	    this.btn_1 =((TwoKeyButton)findViewById(R.id.btn_1));
 	    this.btn_1.setOnClickListener(this);
@@ -90,74 +70,24 @@ implements OnClickListener,
 	    this.btn_3.setOnClickListener(this);
 	    this.btn_4 = ((TwoKeyButton)findViewById(R.id.btn_4));
 	    this.btn_4.setOnClickListener(this);
-//	    this.btn_1.setPadding(this.btn_1.getPaddingLeft(), this.btn_1.getPaddingTop(), this.btn_1.getPaddingRight(), 117 * this.heightPx / 1240);
-//	    ViewGroup.LayoutParams localLayoutParams5 = this.btn_1.getLayoutParams();
-//	    localLayoutParams5.height = (284 * this.heightPx / 1240);
-//	    localLayoutParams5.width = (114 * this.widthPx / 826);
-//	    this.btn_1.setLayoutParams(localLayoutParams5);
-//	    this.btn_1.invalidate();
-//	    int i = (2 * this.btn_2.getPaddingLeft() + this.btn_3.getPaddingLeft()) / 3;
-//	    this.btn_2.setPadding(i, this.btn_2.getPaddingTop(), this.btn_2.getPaddingRight(), 60 * this.heightPx / 1240);
-//	    ViewGroup.LayoutParams localLayoutParams6 = this.btn_2.getLayoutParams();
-//	    localLayoutParams6.height = (284 * this.heightPx / 1240);
-//	    localLayoutParams6.width = (114 * this.widthPx / 826);
-//	    this.btn_2.setLayoutParams(localLayoutParams6);
-//	    this.btn_2.invalidate();
-//	    ViewGroup.LayoutParams localLayoutParams7 = this.btn_3.getLayoutParams();
-//	    localLayoutParams7.height = (284 * this.heightPx / 1240);
-//	    localLayoutParams7.width = (114 * this.widthPx / 826);
-//	    this.btn_3.setPadding(i, this.btn_3.getPaddingTop(), this.btn_3.getPaddingRight(), 60 * this.heightPx / 1240);
-//	    this.btn_3.setLayoutParams(localLayoutParams7);
-//	    this.btn_3.invalidate();
-//	    ViewGroup.LayoutParams localLayoutParams8 = this.btn_4.getLayoutParams();
-//	    localLayoutParams8.height = (284 * this.heightPx / 1240);
-//	    localLayoutParams8.width = (114 * this.widthPx / 826);
-//	    this.btn_4.setPadding(this.btn_4.getPaddingLeft(), this.btn_4.getPaddingBottom(), this.btn_4.getPaddingRight(), 117 * this.heightPx / 1240);
-//	    this.btn_4.setLayoutParams(localLayoutParams8);
-//	    this.btn_4.invalidate();
 	  }
-	@Override
-	public void onDownKeyTouch(FourKeyButton paramFourKeyButton) {
-		// TODO Auto-generated method stub
-		mApp.SocketSend("onDownKeyTouch".getBytes());
-	}
-	@Override
-	public void onKeyTouchEnd(FourKeyButton paramFourKeyButton) {
-		// TODO Auto-generated method stub
-		mApp.SocketSend("onKeyTouchEnd".getBytes());
-	}
-	@Override
-	public void onLeftKeyTouch(FourKeyButton paramFourKeyButton) {
-		// TODO Auto-generated method stub
-		mApp.SocketSend("onLeftKeyTouch".getBytes());
-	}
-	@Override
-	public void onRightKeyTouch(FourKeyButton paramFourKeyButton) {
-		// TODO Auto-generated method stub
-		mApp.SocketSend("onRightKeyTouch".getBytes());
-	}
-	@Override
-	public void onUpKeyTouch(FourKeyButton paramFourKeyButton) {
-		// TODO Auto-generated method stub
-		mApp.SocketSend("onUpKeyTouch".getBytes());
-	}
 	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		byte[] data  =new byte[6];
 		switch (v.getId()) {
-		case R.id.btn_on:
-			log("btn_on");
-			mApp.SocketSend("btn_on".getBytes());
-			//Toast.makeText(this, "btn_on", 200).show()
-			break;
 		case R.id.btn_off:
 			log("btn_off");
-			mApp.SocketSend("btn_off".getBytes());
+			mApp.control_toggle(Protocol.FLAG_UI_COLOR, 0, false);
+			break;
+		case R.id.btn_on:
+			log("btn_on");
+			mApp.control_toggle(Protocol.FLAG_UI_COLOR, 0, true);
 			break;
 		case R.id.btn_w:
 			log("btn_w");
-			mApp.SocketSend("btn_w".getBytes());
+			//mApp.SocketSend("btn_w".getBytes());
 			break;
 		case R.id.btn_home:
 			log("btn_home");
@@ -166,26 +96,80 @@ implements OnClickListener,
 		case R.id.btn_1:
 			btn_1.toggle();
 			log(""+btn_1.isStateOn());
-			mApp.SocketSend(String.format("btn_1 %s",btn_1.isStateOn()).getBytes());
+			mApp.control_toggle(Protocol.FLAG_UI_COLOR, 1, btn_1.isStateOn());
 			break;
 		case R.id.btn_2:
 			btn_2.toggle();
 			log(""+btn_2.isStateOn());
-			mApp.SocketSend(String.format("btn_2 %s",btn_2.isStateOn()).getBytes());
+			mApp.control_toggle(Protocol.FLAG_UI_COLOR, 2, btn_2.isStateOn());
 			break;
 		case R.id.btn_3:
 			btn_3.toggle();
 			log(""+btn_3.isStateOn());
-			mApp.SocketSend(String.format("btn_3 %s",btn_3.isStateOn()).getBytes());
+			mApp.control_toggle(Protocol.FLAG_UI_COLOR, 3, btn_3.isStateOn());
 			break;
 		case R.id.btn_4:
 			btn_4.toggle();
 			log(""+btn_4.isStateOn());
-			mApp.SocketSend(String.format("btn_4 %s",btn_4.isStateOn()).getBytes());
+			mApp.control_toggle(Protocol.FLAG_UI_COLOR, 4, btn_4.isStateOn());
 			break;
 		default:
 			break;
 		}
+		data = null;
+	}
+	@Override
+	public void onKeyTouchEnd(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onKeyTouchEnd");
+	}
+	@Override
+	public void onDownKeyTouchDown(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onDownKeyTouchDown");
+		//调暗开始
+		mApp.control_cool_warm(Protocol.FLAG_FUNCTION_COOL_WARM_STOP);
+	}
+	@Override
+	public void onLeftKeyTouchDown(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onLeftKeyTouchDown");
+	}
+	@Override
+	public void onRightKeyTouchDown(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onRightKeyTouchDown");
+	}
+	@Override
+	public void onUpKeyTouchDown(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onUpKeyTouchDown");
+		//调暗结束
+		mApp.control_cool_warm(Protocol.FLAG_FUNCTION_COOL_WARM_INCREASE);
+	}
+	@Override
+	public void onDownKeyTouchUp(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onDownKeyTouchUp");
+	}
+	@Override
+	public void onLeftKeyTouchUp(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onLeftKeyTouchUp");
+		//选择冷色
+		mApp.setCoolWarm(Protocol.FLAG_FUNCTION_COOL_BRIGHT);
+	}
+	@Override
+	public void onRightKeyTouchUp(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onRightKeyTouchUp");
+		//选择暖色
+		mApp.setCoolWarm(Protocol.FLAG_FUNCTION_WARM_BRIGHT);
+	}
+	@Override
+	public void onUpKeyTouchUp(FourKeyButton paramFourKeyButton) {
+		// TODO Auto-generated method stub
+		log("onUpKeyTouchUp");
 	}
 	void log(String msg){
 		Log.d(tag, msg);

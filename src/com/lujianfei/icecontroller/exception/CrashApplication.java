@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.lujianfei.icecontroller.Common;
 import com.lujianfei.icecontroller.MainActivity;
+import com.lujianfei.icecontroller.Protocol;
 import com.lujianfei.icecontroller.model.ConnectionInfo;
 import com.lujianfei.icecontroller.services.SocketConnectionService;
 import com.lujianfei.icecontroller.utilities.SystemHelper;
@@ -138,6 +139,86 @@ public class CrashApplication extends Application {
 		intent_service.putExtra(Common.MessageOfService.BYTE_ARRAY,data);
 		startService(intent_service);
 	}
+	/**
+	 * 开关控制
+	 * @param uino 界面
+	 * @param lightno 灯号
+	 * @param status 状态
+	 */
+	public void control_toggle(byte uino,int lightno,boolean status){
+		byte[] data = new byte[6];
+		data[0] = Protocol.FLAG_HEADER;
+		data[1] = uino;
+		data[2] = Protocol.FLAG_FUNCTION_ONOFF;
+		data[3] = (byte) lightno; //灯号
+		data[4] = (status==true?Protocol.FLAG_FUNCTION_ONOFF_ON:Protocol.FLAG_FUNCTION_ONOFF_OFF); 
+		data[5] = Protocol.FLAG_TAIL; 
+		SocketSend(data);
+		data = null;
+	}
+	/**
+	 * 亮度控制
+	 * @param uino 界面
+	 * @param status 状态 
+	 */
+	public void control_bright_dark(byte uino,byte status){
+		byte[] data = new byte[6];
+		data[0] = Protocol.FLAG_HEADER;
+		data[1] = uino;
+		data[2] = Protocol.FLAG_FUNCTION_BRIGHTDARK;
+		data[3] = 0; //灯号 0为总开关
+		data[4] = status; 
+		data[5] = Protocol.FLAG_TAIL; 
+		SocketSend(data);
+	}
+	byte cool_warm = Protocol.FLAG_FUNCTION_COOL_BRIGHT;
+	/**
+	 * 设置冷色或暖色
+	 * @param cool_warm
+	 */
+	public void setCoolWarm(byte cool_warm){
+		this.cool_warm = cool_warm;
+	}
+	/**
+	 * 冷暖光控制
+	 * @param status_increase
+	 */
+	public void control_cool_warm(byte status_increase){
+		byte[] data = new byte[6];
+		data[0] = Protocol.FLAG_HEADER;
+		data[1] = Protocol.FLAG_UI_COLOR;
+		data[2] = cool_warm;
+		data[3] = 0; 
+		data[4] = status_increase; 
+		data[5] = Protocol.FLAG_TAIL; 
+		SocketSend(data);
+	}
+	
+	byte mode = Protocol.FLAG_FUNCTION_NIGHT;
+	/**
+	 * 设置模式
+	 * @param mode
+	 */
+	public void setMode(byte mode){
+		this.mode = mode;
+	}
+	/**
+	 * 模式控制
+	 * @param ui 界面
+	 * @param lightno 灯号
+	 */
+	public void control_mode(byte ui,int lightno,boolean status){
+		byte[] data = new byte[6];
+		//界面+模式代码+灯号+00
+		data[0] = Protocol.FLAG_HEADER;
+		data[1] = ui;
+		data[2] = mode;
+		data[3] = (byte) lightno; 
+		data[4] = (status==true?Protocol.FLAG_FUNCTION_ONOFF_ON:Protocol.FLAG_FUNCTION_ONOFF_OFF); 
+		data[5] = Protocol.FLAG_TAIL; 
+		SocketSend(data);
+	}
+	
 	void log(String msg){
 		Log.d(tag, msg);
 	}

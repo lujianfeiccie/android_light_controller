@@ -243,7 +243,7 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 		Dialog alertDialog = new AlertDialog.Builder(MainActivity.this). 
                 setTitle("提示"). 
                 setMessage("连接异常，重连?"). 
-                setIcon(R.drawable.ic_launcher). 
+                setIcon(R.drawable.icon). 
                 setPositiveButton("确定", new DialogInterface.OnClickListener() { 
                     @Override 
                     public void onClick(DialogInterface dialog, int which) { 

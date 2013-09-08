@@ -124,10 +124,11 @@ public class FourKeyButton extends Button
     switch (paramMotionEvent.getAction()) {
 	case MotionEvent.ACTION_DOWN:
 		down = true;
+		doHandleDown(x,y);
 		break;
 	case MotionEvent.ACTION_UP:
 		if(down){
-			doHandle(x,y);
+			doHandleUp(x,y);
 			down = false;
 		}
 		break;
@@ -137,7 +138,7 @@ public class FourKeyButton extends Button
   
     return true;
   }
- void doHandle(float x,float y){
+  void doHandleDown(float x,float y){
 	  if(isInrange(x,y)){
 	    	float horizontalY_start = (float)height/4.0f;
 	    	float horizontalY_end = (float)height*3.0f/4.0f;
@@ -147,22 +148,53 @@ public class FourKeyButton extends Button
 	    		(y>0 && y< (height/4.0f))){
 	    		log("up");
 	    		setBackgroundDrawable(upBitmap);
-	    		keyTouchListener.onUpKeyTouch(this);
+	    		keyTouchListener.onUpKeyTouchDown(this);
 	    	}else if((x> verticalX_start && x < verticalX_end) &&
 	        		(y>(height * 3.0f/4.0f) && y< height)){
 	    		log("down");
 	    		setBackgroundDrawable(downBitmap);
-	    		keyTouchListener.onDownKeyTouch(this);
+	    		keyTouchListener.onDownKeyTouchDown(this);
 	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
 	        		(x>0 && x< (width / 4.0f))){
 	    		log("left");
 	    		setBackgroundDrawable(leftBitmap);
-	    		keyTouchListener.onLeftKeyTouch(this);
+	    		keyTouchListener.onLeftKeyTouchDown(this);
 	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
 	        		(x>(width*3.0f/4.0f) && x< width)){
 	    		log("right");
 	    		setBackgroundDrawable(rightBitmap);
-	    		keyTouchListener.onRightKeyTouch(this);
+	    		keyTouchListener.onRightKeyTouchDown(this);
+	    	}
+	    }else{
+	    	log("isOut");
+	    }
+ }
+ void doHandleUp(float x,float y){
+	  if(isInrange(x,y)){
+	    	float horizontalY_start = (float)height/4.0f;
+	    	float horizontalY_end = (float)height*3.0f/4.0f;
+	    	float verticalX_start = (float)width/4.0f;
+	    	float verticalX_end = (float)width*3.0f/4.0f;
+	    	if((x> verticalX_start && x < verticalX_end) &&
+	    		(y>0 && y< (height/4.0f))){
+	    		log("up");
+	    		setBackgroundDrawable(upBitmap);
+	    		keyTouchListener.onUpKeyTouchUp(this);
+	    	}else if((x> verticalX_start && x < verticalX_end) &&
+	        		(y>(height * 3.0f/4.0f) && y< height)){
+	    		log("down");
+	    		setBackgroundDrawable(downBitmap);
+	    		keyTouchListener.onDownKeyTouchUp(this);
+	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
+	        		(x>0 && x< (width / 4.0f))){
+	    		log("left");
+	    		setBackgroundDrawable(leftBitmap);
+	    		keyTouchListener.onLeftKeyTouchUp(this);
+	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
+	        		(x>(width*3.0f/4.0f) && x< width)){
+	    		log("right");
+	    		setBackgroundDrawable(rightBitmap);
+	    		keyTouchListener.onRightKeyTouchUp(this);
 	    	}
 	    }else{
 	    	log("isOut");
@@ -175,15 +207,15 @@ public class FourKeyButton extends Button
 
   public static abstract interface OnFourKeyTouchListener
   {
-    public abstract void onDownKeyTouch(FourKeyButton paramFourKeyButton);
-
     public abstract void onKeyTouchEnd(FourKeyButton paramFourKeyButton);
-
-    public abstract void onLeftKeyTouch(FourKeyButton paramFourKeyButton);
-
-    public abstract void onRightKeyTouch(FourKeyButton paramFourKeyButton);
-
-    public abstract void onUpKeyTouch(FourKeyButton paramFourKeyButton);
+    public abstract void onDownKeyTouchDown(FourKeyButton paramFourKeyButton);
+    public abstract void onLeftKeyTouchDown(FourKeyButton paramFourKeyButton);
+    public abstract void onRightKeyTouchDown(FourKeyButton paramFourKeyButton);
+    public abstract void onUpKeyTouchDown(FourKeyButton paramFourKeyButton);
+    public abstract void onDownKeyTouchUp(FourKeyButton paramFourKeyButton);
+    public abstract void onLeftKeyTouchUp(FourKeyButton paramFourKeyButton);
+    public abstract void onRightKeyTouchUp(FourKeyButton paramFourKeyButton);
+    public abstract void onUpKeyTouchUp(FourKeyButton paramFourKeyButton);
   }
   
   void log(String msg){
