@@ -1,0 +1,17 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="39dip"
+    android:orientation="vertical" 
+    android:background="#36312e"
+    android:id="@id/imageView1">
+    <Button
+        android:id="@id/btn_home"
+        android:layout_width="50.0dip"
+        android:layout_height="30.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60.0dip"
+        android:layout_marginTop="5.0dip"
+        android:background="@drawable/btn_home_background"
+        android:visibility="visible" />
+    </RelativeLayout>

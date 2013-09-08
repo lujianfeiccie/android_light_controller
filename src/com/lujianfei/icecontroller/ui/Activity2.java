@@ -21,8 +21,6 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 {
 	private String tag = getClass().getSimpleName();
 	  public DisplayMetrics displayMetrics;
-	  private int widthPx;
-	  private int heightPx;
 	  private TwoKeyButton btn_1;
 	  private TwoKeyButton btn_2;
 	  private TwoKeyButton btn_3;
@@ -41,23 +39,8 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		log("onCreate");
-		  this.displayMetrics = new DisplayMetrics();
-		    getWindowManager().getDefaultDisplay().getMetrics(this.displayMetrics);
-		    this.widthPx = this.displayMetrics.widthPixels;
-		    this.heightPx = this.displayMetrics.heightPixels;
-		    float f1 = Util.convertPxOrDip(this.displayMetrics.density, this.widthPx);
-		    float f2 = Util.convertPxOrDip(this.displayMetrics.density, this.heightPx);
-		    log(" widthPx: " + this.widthPx + " widthdip: " + f1);
-		    log(" heightPx: " + this.heightPx + " heightdip: " + f2);
-		    if ((f1 >= 480.0F) && (this.widthPx >= 600))
-		      setContentView(R.layout.activity2_galaxy3);
-		    
+		      setContentView(R.layout.activity2);
 		    GlobalData.activity2 = this;
-		      if ((f1 >= 320.0F) && (this.widthPx >= 480))
-		        setContentView(R.layout.activity2_galaxy3);
-		      else
-		    	  setContentView(R.layout.activity2_320);
-		      setSize();
 		      findView();
 		    //  initData();
 	}
@@ -74,45 +57,45 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 		    this.btn_bright_up = ((Button)findViewById(R.id.btn_bright_up));
 		    this.btn_bright_up.setOnClickListener(this);
 		    this.circleImageViewRl = ((RelativeLayout)findViewById(R.id.circleImageView_rl));
-		    ViewGroup.LayoutParams localLayoutParams1 = this.btn_on.getLayoutParams();
-		    localLayoutParams1.height = (94 * this.heightPx / 1240);
-		    localLayoutParams1.width = (212 * this.widthPx / 826);
-		    this.btn_on.setPadding(95, 50 * this.heightPx / 1240, this.btn_on.getPaddingRight(), this.btn_on.getPaddingBottom());
-		    this.btn_on.setLayoutParams(localLayoutParams1);
-		    this.btn_on.invalidate();
-		    ViewGroup.LayoutParams localLayoutParams2 = this.btn_off.getLayoutParams();
-		    localLayoutParams2.height = (94 * this.heightPx / 1240);
-		    localLayoutParams2.width = (212 * this.widthPx / 826);
-		    this.btn_off.setPadding(this.btn_off.getPaddingLeft(), 50 * this.heightPx / 1240, 95, this.btn_off.getPaddingBottom());
-		    this.btn_off.setLayoutParams(localLayoutParams2);
-		    this.btn_off.invalidate();
-		    ViewGroup.LayoutParams localLayoutParams3 = this.btn_bright_down.getLayoutParams();
-		    localLayoutParams3.height = (94 * this.heightPx / 1240);
-		    localLayoutParams3.width = (212 * this.widthPx / 826);
-		    this.btn_bright_down.setPadding(95, 50 * this.heightPx / 1240, this.btn_bright_down.getPaddingRight(), this.btn_bright_down.getPaddingBottom());
-		    this.btn_bright_down.setLayoutParams(localLayoutParams3);
-		    this.btn_bright_down.invalidate();
-		    ViewGroup.LayoutParams localLayoutParams4 = this.btn_bright_up.getLayoutParams();
-		    localLayoutParams4.height = (94 * this.heightPx / 1240);
-		    localLayoutParams4.width = (212 * this.widthPx / 826);
-		    this.btn_bright_up.setPadding(this.btn_bright_up.getPaddingLeft(), 50 * this.heightPx / 1240, 95, this.btn_bright_up.getPaddingBottom());
-		    this.btn_bright_up.setLayoutParams(localLayoutParams4);
-		    this.btn_bright_up.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams1 = this.btn_on.getLayoutParams();
+//		    localLayoutParams1.height = (94 * this.heightPx / 1240);
+//		    localLayoutParams1.width = (212 * this.widthPx / 826);
+//		    this.btn_on.setPadding(95, 50 * this.heightPx / 1240, this.btn_on.getPaddingRight(), this.btn_on.getPaddingBottom());
+//		    this.btn_on.setLayoutParams(localLayoutParams1);
+//		    this.btn_on.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams2 = this.btn_off.getLayoutParams();
+//		    localLayoutParams2.height = (94 * this.heightPx / 1240);
+//		    localLayoutParams2.width = (212 * this.widthPx / 826);
+//		    this.btn_off.setPadding(this.btn_off.getPaddingLeft(), 50 * this.heightPx / 1240, 95, this.btn_off.getPaddingBottom());
+//		    this.btn_off.setLayoutParams(localLayoutParams2);
+//		    this.btn_off.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams3 = this.btn_bright_down.getLayoutParams();
+//		    localLayoutParams3.height = (94 * this.heightPx / 1240);
+//		    localLayoutParams3.width = (212 * this.widthPx / 826);
+//		    this.btn_bright_down.setPadding(95, 50 * this.heightPx / 1240, this.btn_bright_down.getPaddingRight(), this.btn_bright_down.getPaddingBottom());
+//		    this.btn_bright_down.setLayoutParams(localLayoutParams3);
+//		    this.btn_bright_down.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams4 = this.btn_bright_up.getLayoutParams();
+//		    localLayoutParams4.height = (94 * this.heightPx / 1240);
+//		    localLayoutParams4.width = (212 * this.widthPx / 826);
+//		    this.btn_bright_up.setPadding(this.btn_bright_up.getPaddingLeft(), 50 * this.heightPx / 1240, 95, this.btn_bright_up.getPaddingBottom());
+//		    this.btn_bright_up.setLayoutParams(localLayoutParams4);
+//		    this.btn_bright_up.invalidate();
 		    this.circleImageView = ((CircleImageView)findViewById(R.id.circleImageView));
 		    this.circleImageView.setOnCircleImageViewChange(this);
 		    this.btn_rgb = ((RGBKeyButton)findViewById(R.id.btn_rgb));
 		    this.btn_rgb.setOnClickListener(this);
-		    ViewGroup.LayoutParams localLayoutParams5 = this.circleImageViewRl.getLayoutParams();
-		    localLayoutParams5.height = (570 * this.heightPx / 1240);
-		    localLayoutParams5.width = (570 * this.heightPx / 1240);
-		    this.circleImageViewRl.setPadding(this.circleImageViewRl.getPaddingLeft(), 0, this.circleImageViewRl.getPaddingRight(), this.circleImageViewRl.getPaddingBottom());
-		    this.circleImageViewRl.setLayoutParams(localLayoutParams5);
-		    this.circleImageViewRl.invalidate();
-		    ViewGroup.LayoutParams localLayoutParams6 = this.circleImageView.getLayoutParams();
-		    localLayoutParams6.height = (570 * this.heightPx / 1240);
-		    localLayoutParams6.width = (570 * this.heightPx / 1240);
-		    this.circleImageView.setLayoutParams(localLayoutParams6);
-		    this.circleImageView.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams5 = this.circleImageViewRl.getLayoutParams();
+//		    localLayoutParams5.height = (570 * this.heightPx / 1240);
+//		    localLayoutParams5.width = (570 * this.heightPx / 1240);
+//		    this.circleImageViewRl.setPadding(this.circleImageViewRl.getPaddingLeft(), 0, this.circleImageViewRl.getPaddingRight(), this.circleImageViewRl.getPaddingBottom());
+//		    this.circleImageViewRl.setLayoutParams(localLayoutParams5);
+//		    this.circleImageViewRl.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams6 = this.circleImageView.getLayoutParams();
+//		    localLayoutParams6.height = (570 * this.heightPx / 1240);
+//		    localLayoutParams6.width = (570 * this.heightPx / 1240);
+//		    this.circleImageView.setLayoutParams(localLayoutParams6);
+//		    this.circleImageView.invalidate();
 		    this.btn_1 = ((TwoKeyButton)findViewById(R.id.btn_1));
 		    this.btn_1.setOnClickListener(this);
 		    this.btn_2 = ((TwoKeyButton)findViewById(R.id.btn_2));
@@ -121,41 +104,32 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 		    this.btn_3.setOnClickListener(this);
 		    this.btn_4 = ((TwoKeyButton)findViewById(R.id.btn_4));
 		    this.btn_4.setOnClickListener(this);
-		    this.btn_1.setPadding(this.btn_1.getPaddingLeft(), this.btn_1.getPaddingTop(), this.btn_1.getPaddingRight(), 117 * this.heightPx / 1240);
-		    ViewGroup.LayoutParams localLayoutParams7 = this.btn_1.getLayoutParams();
-		    localLayoutParams7.height = (284 * this.heightPx / 1240);
-		    localLayoutParams7.width = (117 * this.widthPx / 826);
-		    this.btn_1.setLayoutParams(localLayoutParams7);
-		    this.btn_1.invalidate();
-		    int i = (2 * this.btn_2.getPaddingLeft() + this.btn_3.getPaddingLeft()) / 3;
-		    this.btn_2.setPadding(i, this.btn_2.getPaddingTop(), this.btn_2.getPaddingRight(), 60 * this.heightPx / 1240);
-		    ViewGroup.LayoutParams localLayoutParams8 = this.btn_2.getLayoutParams();
-		    localLayoutParams8.height = (284 * this.heightPx / 1240);
-		    localLayoutParams8.width = (117 * this.widthPx / 826);
-		    this.btn_2.setLayoutParams(localLayoutParams8);
-		    this.btn_2.invalidate();
-		    ViewGroup.LayoutParams localLayoutParams9 = this.btn_3.getLayoutParams();
-		    localLayoutParams9.height = (284 * this.heightPx / 1240);
-		    localLayoutParams9.width = (117 * this.widthPx / 826);
-		    this.btn_3.setPadding(i, this.btn_3.getPaddingTop(), this.btn_3.getPaddingRight(), 60 * this.heightPx / 1240);
-		    this.btn_3.setLayoutParams(localLayoutParams9);
-		    this.btn_3.invalidate();
-		    ViewGroup.LayoutParams localLayoutParams10 = this.btn_4.getLayoutParams();
-		    localLayoutParams10.height = (284 * this.heightPx / 1240);
-		    localLayoutParams10.width = (117 * this.widthPx / 826);
-		    this.btn_4.setPadding(this.btn_4.getPaddingLeft(), this.btn_4.getPaddingBottom(), this.btn_4.getPaddingRight(), 117 * this.heightPx / 1240);
-		    this.btn_4.setLayoutParams(localLayoutParams10);
-		    this.btn_4.invalidate();
+//		    this.btn_1.setPadding(this.btn_1.getPaddingLeft(), this.btn_1.getPaddingTop(), this.btn_1.getPaddingRight(), 117 * this.heightPx / 1240);
+//		    ViewGroup.LayoutParams localLayoutParams7 = this.btn_1.getLayoutParams();
+//		    localLayoutParams7.height = (284 * this.heightPx / 1240);
+//		    localLayoutParams7.width = (117 * this.widthPx / 826);
+//		    this.btn_1.setLayoutParams(localLayoutParams7);
+//		    this.btn_1.invalidate();
+//		    int i = (2 * this.btn_2.getPaddingLeft() + this.btn_3.getPaddingLeft()) / 3;
+//		    this.btn_2.setPadding(i, this.btn_2.getPaddingTop(), this.btn_2.getPaddingRight(), 60 * this.heightPx / 1240);
+//		    ViewGroup.LayoutParams localLayoutParams8 = this.btn_2.getLayoutParams();
+//		    localLayoutParams8.height = (284 * this.heightPx / 1240);
+//		    localLayoutParams8.width = (117 * this.widthPx / 826);
+//		    this.btn_2.setLayoutParams(localLayoutParams8);
+//		    this.btn_2.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams9 = this.btn_3.getLayoutParams();
+//		    localLayoutParams9.height = (284 * this.heightPx / 1240);
+//		    localLayoutParams9.width = (117 * this.widthPx / 826);
+//		    this.btn_3.setPadding(i, this.btn_3.getPaddingTop(), this.btn_3.getPaddingRight(), 60 * this.heightPx / 1240);
+//		    this.btn_3.setLayoutParams(localLayoutParams9);
+//		    this.btn_3.invalidate();
+//		    ViewGroup.LayoutParams localLayoutParams10 = this.btn_4.getLayoutParams();
+//		    localLayoutParams10.height = (284 * this.heightPx / 1240);
+//		    localLayoutParams10.width = (117 * this.widthPx / 826);
+//		    this.btn_4.setPadding(this.btn_4.getPaddingLeft(), this.btn_4.getPaddingBottom(), this.btn_4.getPaddingRight(), 117 * this.heightPx / 1240);
+//		    this.btn_4.setLayoutParams(localLayoutParams10);
+//		    this.btn_4.invalidate();
 	}
-	private void setSize()
-	  {
-	    if (this.widthPx / this.heightPx > 0)
-	    {
-	      this.widthPx = (826 * this.heightPx / 1240);
-	      return;
-	    }
-	    this.heightPx = (1240 * this.widthPx / 826);
-	  }
 	void log(String msg){
 		Log.d(tag, msg);
 	}

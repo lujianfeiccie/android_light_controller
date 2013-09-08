@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+ <resources >
     <item type="id" name="listView">false</item>
     <item type="id" name="btn_add">false</item>
     <item type="id" name="row">false</item>

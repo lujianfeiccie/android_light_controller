@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+        android:background="@drawable/back">
+<include layout="@layout/title_bar2"/>
+<LinearLayout
+        style="@style/layout_top">
+
+        <Button
+            android:id="@id/btn_on"
+            style="@style/layout_top_button"
+                 android:layout_marginRight="20dp"
+            android:background="@drawable/btn_on_background" />
+
+        <Button
+            android:id="@id/btn_off"
+       style="@style/layout_top_button"
+                 android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_off_background" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/menu_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <!-- 第一排 -->
+        <LinearLayout
+        style="@style/layout_row"
+            >
+            <!-- 第一个 -->
+            <LinearLayout
+              	style="@style/layout_button">
+                <Button
+                    android:id="@id/btn_night"
+             		style="@style/activity3_button"
+                    android:background="@drawable/btn_night_background" />
+                <TextView
+                    android:id="@id/tv_night"
+                      style="@style/activity3_textview"
+                    android:text="Night"
+                    />
+            </LinearLayout>
+			<!-- 第二个 -->
+            <LinearLayout
+                style="@style/layout_button">
+
+                <Button
+                    android:id="@id/btn_meeting"
+             	style="@style/activity3_button"
+                    android:background="@drawable/btn_meeting_background" />
+
+                <TextView
+                    android:id="@id/tv_meeting"
+                style="@style/activity3_textview"
+                    android:text="Meeting"
+                    />
+            </LinearLayout>
+			<!-- 第三个 -->
+            <LinearLayout
+                style="@style/layout_button" >
+
+                <Button
+                    android:id="@id/btn_reading"
+                    	style="@style/activity3_button"
+                    android:background="@drawable/btn_reading_background" />
+
+                <TextView
+                    android:id="@id/tv_reading"
+                    style="@style/activity3_textview"
+                    android:text="Reading"
+                    />
+            </LinearLayout>
+			<!-- 第四个 -->
+            <LinearLayout
+               style="@style/layout_button">
+
+                <Button
+                    android:id="@id/btn_mode"
+                    	style="@style/activity3_button"
+                    android:background="@drawable/btn_mode_background" />
+
+                <TextView
+                    android:id="@id/tv_mode"
+                    style="@style/activity3_textview"
+                    android:text="Mode"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+	  <!-- 第二排 -->
+        <LinearLayout
+            style="@style/layout_row" >
+
+            <LinearLayout
+               style="@style/layout_button">
+
+                <Button
+                    android:id="@id/btn_timer"
+                 	style="@style/activity3_button"
+                    android:background="@drawable/btn_timer_background" />
+
+                <TextView
+                    android:id="@id/tv_timer"
+                    style="@style/activity3_textview"
+                    android:text="Timer"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+               style="@style/layout_button">
+
+                <Button
+                    android:id="@id/btn_alarm"
+                style="@style/activity3_button"
+                    android:background="@drawable/btn_alarm_background" />
+
+                <TextView
+                    android:id="@id/tv_alarm"
+                    style="@style/activity3_textview"
+                    android:text="Alarm"
+                  />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layout_button" >
+
+                <Button
+                    android:id="@id/btn_sleep"
+                 style="@style/activity3_button"
+                    android:background="@drawable/btn_sleep_background" />
+
+                <TextView
+                    android:id="@id/tv_sleep"
+                    style="@style/activity3_textview"
+                    android:text="Sleep"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layout_button">
+
+                <Button
+                    android:id="@id/btn_recreation"
+                  style="@style/activity3_button"
+                    android:background="@drawable/btn_recreation_background" />
+
+                <TextView
+                    android:id="@id/tv_recreation"
+                    style="@style/activity3_textview"
+                    android:text="Recreation"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+ <!-- 四个开关按钮 -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6dp"
+            android:gravity="top|center"
+            android:orientation="horizontal" >
+
+             <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_1"
+            	style="@style/layout_four_toggle_button_1"
+                normalBackground="@drawable/one_1"
+                offBackground="@drawable/one_1_down"
+                onBackground="@drawable/one_1_up" />
+
+            <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_2"
+             style="@style/layout_four_toggle_button_2"
+                normalBackground="@drawable/one_2"
+                offBackground="@drawable/one_2_down"
+                onBackground="@drawable/one_2_up" />
+
+            <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_3"
+             style="@style/layout_four_toggle_button_3"
+                normalBackground="@drawable/one_3"
+                offBackground="@drawable/one_3_down"
+                onBackground="@drawable/one_3_up" />
+
+            <com.lujianfei.icecontroller.ui.custom.TwoKeyButton
+                android:id="@id/btn_4"
+               style="@style/layout_four_toggle_button_4"
+                normalBackground="@drawable/one_4"
+                offBackground="@drawable/one_4_down"
+                onBackground="@drawable/one_4_up" />
+        </LinearLayout>
+</LinearLayout>

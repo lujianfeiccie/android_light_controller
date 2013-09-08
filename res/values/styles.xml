@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <style name="AppBaseTheme" parent="@android:style/Theme.Light" />
     <style name="AppTheme" parent="@style/AppBaseTheme" />
     <style name="dialog" parent="@android:style/Theme.Dialog">
@@ -62,4 +64,63 @@
        <item name="android:textColor">#ff333333</item>
        <item name="android:textSize">16.0dip</item>
    </style>
+   <style name="activity3_button">
+       <item name="android:layout_width">60dp</item>
+       <item name="android:layout_height">60dp</item>
+       <item name="android:layout_margin">1.0dip</item>
+   </style>
+   <style name="activity3_textview">
+       <item name="android:layout_width">60dp</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:gravity">center</item>
+       <item name="android:textColor">#ffffffff</item>
+   </style>
+   <style name="layout_row">
+       <item name="android:layout_width">wrap_content</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:orientation">horizontal</item>
+   </style>
+   <style name="layout_button">
+       <item name="android:layout_width">fill_parent</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:orientation">vertical</item>
+       <item name="android:padding">2dp</item>
+   </style>
+   <!-- activity1 and activity3 -->
+   <style name="layout_top">
+       <item name="android:layout_width">fill_parent</item>
+       <item name="android:layout_height">73dp</item>
+       <item name="android:gravity">center</item>
+       <item name="android:orientation">horizontal</item>
+   </style>
+   <style name="layout_top_button">
+       <item name="android:layout_width">90.0dip</item>
+       <item name="android:layout_height">40.0dip</item>
+   </style>
+   <!-- four toggle button base -->
+   <style name="layout_four_toggle_button_base">
+       <item name="android:layout_width">50.0dip</item>
+       <item name="android:layout_height">100.0dip</item>
+   </style>
+   <!-- four toggle button 1 -->
+   <style name="layout_four_toggle_button_1" parent="@style/layout_four_toggle_button_base">
+       <item name="android:layout_marginRight">5dp</item>
+   </style>
+   <!-- four toggle button 2 -->
+   <style name="layout_four_toggle_button_2" parent="@style/layout_four_toggle_button_base">
+       <item name="android:layout_marginLeft">5dp</item>
+       <item name="android:layout_marginRight">5dp</item>
+       <item name="android:layout_marginTop">10dp</item>
+   </style>
+   <!-- four toggle button 3 -->
+   <style name="layout_four_toggle_button_3" parent="@style/layout_four_toggle_button_base">
+        <item name="android:layout_marginLeft">5dp</item>
+       <item name="android:layout_marginRight">5dp</item>
+          <item name="android:layout_marginTop">10dp</item>
+   </style>
+   <!-- four toggle button 4 -->
+   <style name="layout_four_toggle_button_4" parent="@style/layout_four_toggle_button_base">
+        <item name="android:layout_marginLeft">5dp</item>
+   </style>
+   
 </resources>
