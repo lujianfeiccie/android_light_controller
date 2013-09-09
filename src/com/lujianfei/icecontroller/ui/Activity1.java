@@ -128,7 +128,7 @@ implements OnClickListener,
 		// TODO Auto-generated method stub
 		log("onDownKeyTouchDown");
 		//调暗开始
-		mApp.control_cool_warm(Protocol.FLAG_FUNCTION_COOL_WARM_STOP);
+		mApp.control_cool_or_warm_down(Protocol.FLAG_FUNCTION_COOL_WARM_INCREASE);
 	}
 	@Override
 	public void onLeftKeyTouchDown(FourKeyButton paramFourKeyButton) {
@@ -144,32 +144,36 @@ implements OnClickListener,
 	public void onUpKeyTouchDown(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
 		log("onUpKeyTouchDown");
-		//调暗结束
-		mApp.control_cool_warm(Protocol.FLAG_FUNCTION_COOL_WARM_INCREASE);
+		//调暗开始
+		mApp.control_cool_or_warm_up(Protocol.FLAG_FUNCTION_COOL_WARM_INCREASE);
 	}
 	@Override
 	public void onDownKeyTouchUp(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
 		log("onDownKeyTouchUp");
+		//调暗结束
+		mApp.control_cool_or_warm_down(Protocol.FLAG_FUNCTION_COOL_WARM_STOP);
 	}
 	@Override
 	public void onLeftKeyTouchUp(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
 		log("onLeftKeyTouchUp");
 		//选择冷色
-		mApp.setCoolWarm(Protocol.FLAG_FUNCTION_COOL_BRIGHT);
+		mApp.setCool(true);
 	}
 	@Override
 	public void onRightKeyTouchUp(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
 		log("onRightKeyTouchUp");
 		//选择暖色
-		mApp.setCoolWarm(Protocol.FLAG_FUNCTION_WARM_BRIGHT);
+		mApp.setCool(false);
 	}
 	@Override
 	public void onUpKeyTouchUp(FourKeyButton paramFourKeyButton) {
 		// TODO Auto-generated method stub
 		log("onUpKeyTouchUp");
+		//调暗结束
+		mApp.control_cool_or_warm_up(Protocol.FLAG_FUNCTION_COOL_WARM_STOP);
 	}
 	void log(String msg){
 		Log.d(tag, msg);

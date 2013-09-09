@@ -171,29 +171,57 @@ public class CrashApplication extends Application {
 		data[5] = Protocol.FLAG_TAIL; 
 		SocketSend(data);
 	}
-	byte cool_warm = Protocol.FLAG_FUNCTION_COOL_BRIGHT;
+	boolean cool = true;
 	/**
 	 * 设置冷色或暖色
 	 * @param cool_warm
 	 */
-	public void setCoolWarm(byte cool_warm){
-		this.cool_warm = cool_warm;
+	public void setCool(boolean cool){
+		this.cool = cool;
 	}
 	/**
-	 * 冷暖光控制
-	 * @param status_increase
+	 * 冷或暖色调亮控制
+	 * @param warm_or_cool 
+	 * @param status_increase 按下还是抬起
 	 */
-	public void control_cool_warm(byte status_increase){
+	public void control_cool_or_warm_up(byte status_increase){
 		byte[] data = new byte[6];
 		data[0] = Protocol.FLAG_HEADER;
 		data[1] = Protocol.FLAG_UI_COLOR;
-		data[2] = cool_warm;
+		if(cool){
+			//冷色
+			data[2] = Protocol.FLAG_FUNCTION_COOL_BRIGHT;
+		}else{
+			//暖色
+			data[2] = Protocol.FLAG_FUNCTION_WARM_BRIGHT;
+		}
 		data[3] = 0; 
 		data[4] = status_increase; 
 		data[5] = Protocol.FLAG_TAIL; 
 		SocketSend(data);
 	}
 	
+	/**
+	 * 冷或暖色调暗控制
+	 * @param warm_or_cool 
+	 * @param status_increase 按下还是抬起
+	 */
+	public void control_cool_or_warm_down(byte status_increase){
+		byte[] data = new byte[6];
+		data[0] = Protocol.FLAG_HEADER;
+		data[1] = Protocol.FLAG_UI_COLOR;
+		if(cool){
+			//冷色
+			data[2] = Protocol.FLAG_FUNCTION_COOL_DARK;
+		}else{
+			//暖色
+			data[2] = Protocol.FLAG_FUNCTION_WARM_DARK;
+		}
+		data[3] = 0; 
+		data[4] = status_increase; 
+		data[5] = Protocol.FLAG_TAIL; 
+		SocketSend(data);
+	}
 	byte mode = Protocol.FLAG_FUNCTION_NIGHT;
 	/**
 	 * 设置模式

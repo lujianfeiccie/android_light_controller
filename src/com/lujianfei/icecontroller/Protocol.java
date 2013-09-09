@@ -76,13 +76,13 @@ public class Protocol {
 	 */
 	public final static byte FLAG_FUNCTION_WARM_BRIGHT = (byte)0x02;
 	/**
-	 * d)	冷暖调亮功能代码：0x03
+	 * d)	冷色调暗功能代码：0x03
 	 */
-	public final static byte FLAG_FUNCTION_COOL_WARM_BRIGHT = (byte)0x03;
+	public final static byte FLAG_FUNCTION_COOL_DARK = (byte)0x03;
 	/**
-	 * e)	冷暖调暗功能代码：0x04
+	 * e)	暖色调暗功能代码：0x04
 	 */
-	public final static byte FLAG_FUNCTION_COOL_WARM_DARK = (byte)0x04;
+	public final static byte FLAG_FUNCTION_WARM_DARK = (byte)0x04;
 	/**
 	 * 亮度增加
 	 */

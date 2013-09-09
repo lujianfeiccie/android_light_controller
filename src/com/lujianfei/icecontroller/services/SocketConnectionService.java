@@ -210,6 +210,7 @@ public class SocketConnectionService extends Service {
 						Common.UI_CONNECTION_TERMINATED);
 			}
 			myApp.setConnecting(false);
+			_TcpConnection = null;
 		}
 	};
 	@Override
