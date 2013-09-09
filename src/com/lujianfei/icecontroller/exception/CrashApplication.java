@@ -222,27 +222,19 @@ public class CrashApplication extends Application {
 		data[5] = Protocol.FLAG_TAIL; 
 		SocketSend(data);
 	}
-	byte mode = Protocol.FLAG_FUNCTION_NIGHT;
-	/**
-	 * 设置模式
-	 * @param mode
-	 */
-	public void setMode(byte mode){
-		this.mode = mode;
-	}
 	/**
 	 * 模式控制
 	 * @param ui 界面
 	 * @param lightno 灯号
 	 */
-	public void control_mode(byte ui,int lightno,boolean status){
+	public void control_mode(byte mode){
 		byte[] data = new byte[6];
 		//界面+模式代码+灯号+00
 		data[0] = Protocol.FLAG_HEADER;
-		data[1] = ui;
+		data[1] = Protocol.FLAG_UI_MODE;
 		data[2] = mode;
-		data[3] = (byte) lightno; 
-		data[4] = (status==true?Protocol.FLAG_FUNCTION_ONOFF_ON:Protocol.FLAG_FUNCTION_ONOFF_OFF); 
+		data[3] = 00; 
+		data[4] = 00; 
 		data[5] = Protocol.FLAG_TAIL; 
 		SocketSend(data);
 	}

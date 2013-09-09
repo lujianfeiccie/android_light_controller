@@ -90,11 +90,11 @@ public class Activity3 extends BaseActivity implements OnClickListener
 		switch (v.getId()) {
 		case R.id.btn_off:
 			log("btn_off");
-			mApp.control_mode(Protocol.FLAG_UI_MODE, 0, false);
+			mApp.control_toggle(Protocol.FLAG_UI_MODE, 0, false);
 			break;
 		case R.id.btn_on:
 			log("btn_on");
-			mApp.control_mode(Protocol.FLAG_UI_MODE, 0, true);
+			mApp.control_toggle(Protocol.FLAG_UI_MODE, 0, true);
 			break;
 		case R.id.btn_w:
 			log("btn_w");
@@ -107,54 +107,54 @@ public class Activity3 extends BaseActivity implements OnClickListener
 		case R.id.btn_1:
 			btn_1.toggle();
 			log(""+btn_1.isStateOn());
-			mApp.control_mode(Protocol.FLAG_UI_MODE, 1, btn_1.isStateOn());
+			mApp.control_toggle(Protocol.FLAG_UI_MODE, 1, btn_1.isStateOn());
 			break;
 		case R.id.btn_2:
 			btn_2.toggle();
 			log(""+btn_2.isStateOn());
-			mApp.control_mode(Protocol.FLAG_UI_MODE, 2, btn_2.isStateOn());
+			mApp.control_toggle(Protocol.FLAG_UI_MODE, 2, btn_2.isStateOn());
 			break;
 		case R.id.btn_3:
 			btn_3.toggle();
 			log(""+btn_3.isStateOn());
-			mApp.control_mode(Protocol.FLAG_UI_MODE, 3, btn_3.isStateOn());
+			mApp.control_toggle(Protocol.FLAG_UI_MODE, 3, btn_3.isStateOn());
 			break;
 		case R.id.btn_4:
 			btn_4.toggle();
 			log(""+btn_4.isStateOn());
-			mApp.control_mode(Protocol.FLAG_UI_MODE, 4, btn_4.isStateOn());
+			mApp.control_toggle(Protocol.FLAG_UI_MODE, 4, btn_4.isStateOn());
 			break;
 		case R.id.btn_meeting:
 			log("btn_meeting");
-			mApp.setMode(Protocol.FLAG_FUNCTION_MEETING);
+			mApp.control_mode(Protocol.FLAG_FUNCTION_MEETING);
 			break;
 		case R.id.btn_alarm:
 			log("btn_alarm");
-			mApp.setMode(Protocol.FLAG_FUNCTION_ALARM);
+			mApp.control_mode(Protocol.FLAG_FUNCTION_ALARM);
 			break;
 		case R.id.btn_mode:
 			log("btn_mode");
-			mApp.setMode(Protocol.FLAG_FUNCTION_MODE);
+			mApp.control_mode(Protocol.FLAG_FUNCTION_MODE);
 			break;
 		case R.id.btn_night:
 			log("btn_night");
-			mApp.setMode(Protocol.FLAG_FUNCTION_NIGHT);
+			mApp.control_mode(Protocol.FLAG_FUNCTION_NIGHT);
 			break;
 		case R.id.btn_reading:
 			log("btn_reading");
-			mApp.setMode(Protocol.FLAG_FUNCTION_READING);
+			mApp.control_mode(Protocol.FLAG_FUNCTION_READING);
 			break;
 		case R.id.btn_recreation:
 			log("btn_recreation");
-			//
+			mApp.control_mode(Protocol.FLAG_FUNCTION_RECREATION);
 			break;
 		case R.id.btn_sleep:
 			log("btn_sleep");
-			mApp.setMode(Protocol.FLAG_FUNCTION_SLEEP);
+			mApp.control_mode(Protocol.FLAG_FUNCTION_SLEEP);
 			break;
 		case R.id.btn_timer:
 			log("btn_timer");
-			mApp.setMode(Protocol.FLAG_FUNCTION_TIMER);
+			mApp.control_mode(Protocol.FLAG_FUNCTION_TIMER);
 			break;
 		default:
 			break;

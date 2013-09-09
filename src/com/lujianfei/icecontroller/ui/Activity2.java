@@ -1,11 +1,13 @@
 package com.lujianfei.icecontroller.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -16,7 +18,6 @@ import com.lujianfei.icecontroller.ui.custom.CircleImageView.OnCircleImageViewCh
 import com.lujianfei.icecontroller.ui.custom.RGBKeyButton;
 import com.lujianfei.icecontroller.ui.custom.TwoKeyButton;
 import com.lujianfei.icecontroller.ui.others.GlobalData;
-import com.lujianfei.icecontroller.ui.util.Util;
 
 public class Activity2 extends BaseActivity implements OnClickListener,OnCircleImageViewChangeListener
 {
@@ -34,7 +35,7 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 	  private RGBKeyButton btn_rgb;
 	  private CircleImageView circleImageView;
 	  private RelativeLayout circleImageViewRl;
-	  
+	  Map<Byte,Byte> colorValue = new HashMap<Byte,Byte>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -43,9 +44,26 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 		      setContentView(R.layout.activity2);
 		    GlobalData.activity2 = this;
 		     findView();
-		    //  initData();
+		    initData();
 	}
-	 private void findView() {
+	 private void initData() {
+		// TODO Auto-generated method stub
+		 colorValue.clear();
+		 colorValue.put((byte)0x01, (byte)0x09);
+		 colorValue.put((byte)0x02, (byte)0x08);
+		 colorValue.put((byte)0x03, (byte)0x07);
+		 colorValue.put((byte)0x04, (byte)0x06);
+		 colorValue.put((byte)0x05, (byte)0x05);
+		 colorValue.put((byte)0x06, (byte)0x04);
+		 colorValue.put((byte)0x07, (byte)0x03);
+		 colorValue.put((byte)0x08, (byte)0x02);
+		 colorValue.put((byte)0x09, (byte)0x01);
+		 colorValue.put((byte)0x0a, (byte)0x0c);
+		 colorValue.put((byte)0x0b, (byte)0x0b);
+		 colorValue.put((byte)0x0c, (byte)0x0a);
+		 colorValue.put((byte)0x0d, (byte)0x0a);
+	}
+	private void findView() {
 		// TODO Auto-generated method stub
 		  this.btn_home = ((Button)findViewById(R.id.btn_home));
 		  this.btn_home.setOnClickListener(this);
@@ -165,11 +183,13 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 			data[1] = Protocol.FLAG_UI_RGB;
 			data[2] = Protocol.FLAG_FUNCTION_COLOR;
 			data[3] = 0; //灯号 0为总开关
-			data[4] = (byte) ((paramCircleImageView.getByteValue()&0xff)/(int)21.3 + 1);
+			byte temp = (byte) ((paramCircleImageView.getByteValue()&0xff)/(int)21.3 + 1);
+			data[4] = colorValue.get(temp);
 			data[5] = Protocol.FLAG_TAIL; 
 			mApp.SocketSend(data);
 		}
 	}
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub

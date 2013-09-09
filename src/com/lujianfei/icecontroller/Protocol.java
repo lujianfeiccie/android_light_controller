@@ -123,5 +123,9 @@ public class Protocol {
  * 7.	Sleep睡眠模式		0x07
  */
 	public final static byte FLAG_FUNCTION_SLEEP = (byte)0x07;
+	/**
+	 * 8.	Recreation 模式		0x08
+	 */
+	public final static byte FLAG_FUNCTION_RECREATION = (byte)0x08;
 	public final static byte FLAG_EXIT = (byte)0xff;
 }
