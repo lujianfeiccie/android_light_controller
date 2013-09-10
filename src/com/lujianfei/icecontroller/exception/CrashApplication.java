@@ -238,7 +238,21 @@ public class CrashApplication extends Application {
 		data[5] = Protocol.FLAG_TAIL; 
 		SocketSend(data);
 	}
-	
+	/**
+	 * 颜色控制
+	 * @param color
+	 */
+	public void control_rgb(byte color){
+		byte[] data = new byte[6];
+		data[0] = Protocol.FLAG_HEADER;
+		data[1] = Protocol.FLAG_UI_RGB;
+		data[2] = Protocol.FLAG_FUNCTION_COLOR;
+		data[3] = 0; //灯号 0为总开关
+		data[4] = color;
+		data[5] = Protocol.FLAG_TAIL; 
+		SocketSend(data);
+		data = null;
+	}
 	void log(String msg){
 		Log.d(tag, msg);
 	}

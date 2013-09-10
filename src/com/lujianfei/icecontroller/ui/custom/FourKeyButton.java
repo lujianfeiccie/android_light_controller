@@ -1,5 +1,7 @@
 package com.lujianfei.icecontroller.ui.custom;
 
+import com.lujianfei.icecontroller.R;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -22,6 +24,10 @@ public class FourKeyButton extends Button
   public int outerRad = 0;
   private Drawable rightBitmap;
   private Drawable upBitmap;
+  private Drawable left_upBitmap;
+  private Drawable left_downBitmap;
+  private Drawable right_upBitmap;
+  private Drawable right_downBitmap;
   private int width;
   private boolean down = false;
   private boolean leftSelected = true;
@@ -58,35 +64,43 @@ public class FourKeyButton extends Button
   }
 
 
-  private void initBitmap(AttributeSet paramAttributeSet)
-  {
-    int disable = paramAttributeSet.getAttributeResourceValue(null, "disableBackground", 0);
-    if (disable!= 0){
-      this.disBitmap = getResources().getDrawable(disable);
-    }
-    int normal = paramAttributeSet.getAttributeResourceValue(null, "normalBackground", 0);
-    if (normal != 0)
-    {
-      this.normalBitmap = getResources().getDrawable(normal);
-    }
-    int up = paramAttributeSet.getAttributeResourceValue(null, "upBackground", 0);
-    if (up != 0){
-      this.upBitmap = getResources().getDrawable(up);
-    }
-    int down = paramAttributeSet.getAttributeResourceValue(null, "downBackground", 0);
-    if (down != 0){
-      this.downBitmap = getResources().getDrawable(down);
-    }
-    int left = paramAttributeSet.getAttributeResourceValue(null, "leftBackground", 0);
-    if (left != 0){
-      this.leftBitmap = getResources().getDrawable(left);
-    }
-    int right = paramAttributeSet.getAttributeResourceValue(null, "rightBackground", 0);
-    if (right != 0){
-      this.rightBitmap = getResources().getDrawable(right);
-    }
-    setBackgroundDrawable(this.normalBitmap);
-  }
+	private void initBitmap(AttributeSet paramAttributeSet) {
+		int disable = paramAttributeSet.getAttributeResourceValue(null,
+				"disableBackground", 0);
+		if (disable != 0) {
+			this.disBitmap = getResources().getDrawable(disable);
+		}
+		int normal = paramAttributeSet.getAttributeResourceValue(null,
+				"normalBackground", 0);
+		if (normal != 0) {
+			this.normalBitmap = getResources().getDrawable(normal);
+		}
+		int up = paramAttributeSet.getAttributeResourceValue(null,
+				"upBackground", 0);
+		if (up != 0) {
+			this.upBitmap = getResources().getDrawable(up);
+		}
+		int down = paramAttributeSet.getAttributeResourceValue(null,
+				"downBackground", 0);
+		if (down != 0) {
+			this.downBitmap = getResources().getDrawable(down);
+		}
+		int left = paramAttributeSet.getAttributeResourceValue(null,
+				"leftBackground", 0);
+		if (left != 0) {
+			this.leftBitmap = getResources().getDrawable(left);
+		}
+		int right = paramAttributeSet.getAttributeResourceValue(null,
+				"rightBackground", 0);
+		if (right != 0) {
+			this.rightBitmap = getResources().getDrawable(right);
+		}
+		this.left_upBitmap = getResources().getDrawable(R.drawable.four_left_up);
+		this.left_downBitmap  = getResources().getDrawable(R.drawable.four_left_down);
+		this.right_upBitmap  = getResources().getDrawable(R.drawable.four_right_up);
+		this.right_downBitmap = getResources().getDrawable(R.drawable.four_right_down);
+		setBackgroundDrawable(this.normalBitmap);
+	}
 
   private void initData()
   {
@@ -148,12 +162,20 @@ public class FourKeyButton extends Button
 	    	if((x> verticalX_start && x < verticalX_end) &&
 	    		(y>0 && y< (height/4.0f))){
 	    		log("up");
-	    		setBackgroundDrawable(upBitmap); //上键
+	    		if(leftSelected){
+	    			setBackgroundDrawable(left_upBitmap); //上键
+	    		}else{
+	    			setBackgroundDrawable(right_upBitmap); //上键	
+	    		}
 	    		keyTouchListener.onUpKeyTouchDown(this);
 	    	}else if((x> verticalX_start && x < verticalX_end) &&
 	        		(y>(height * 3.0f/4.0f) && y< height)){
 	    		log("down");
-	    		setBackgroundDrawable(downBitmap); //下键
+	    		if(leftSelected){
+	    			setBackgroundDrawable(left_downBitmap); //上键
+	    		}else{
+	    			setBackgroundDrawable(right_downBitmap); //上键	
+	    		}
 	    		keyTouchListener.onDownKeyTouchDown(this);
 	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
 	        		(x>0 && x< (width / 4.0f))){

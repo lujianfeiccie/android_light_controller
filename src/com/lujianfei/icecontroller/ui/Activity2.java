@@ -146,14 +146,17 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 				case RGBKeyButton.MODE_R:
 					log("MODE_R");
 					//mApp.SocketSend("MODE_R".getBytes());
+					mApp.control_rgb((byte)0x01);
 					break;
 				case RGBKeyButton.MODE_G:
 					log("MODE_G");
 					//mApp.SocketSend("MODE_G".getBytes());
+					mApp.control_rgb((byte)0x05);
 					break;
 				case RGBKeyButton.MODE_B:
 					log("MODE_B");
 					//mApp.SocketSend("MODE_B".getBytes());
+					mApp.control_rgb((byte)0x09);
 					break;
 				}
 				break;
@@ -178,15 +181,8 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 		if(btn_rgb.isRgbMode()){
 		//	int[] data = paramCircleImageView.getRGB();
 		//	mApp.SocketSend(String.format("RGB(%s %s %s)",data[0],data[1],data[2]).getBytes());
-			byte[] data = new byte[6];
-			data[0] = Protocol.FLAG_HEADER;
-			data[1] = Protocol.FLAG_UI_RGB;
-			data[2] = Protocol.FLAG_FUNCTION_COLOR;
-			data[3] = 0; //灯号 0为总开关
 			byte temp = (byte) ((paramCircleImageView.getByteValue()&0xff)/(int)21.3 + 1);
-			data[4] = colorValue.get(temp);
-			data[5] = Protocol.FLAG_TAIL; 
-			mApp.SocketSend(data);
+			mApp.control_rgb(temp);
 		}
 	}
 	
