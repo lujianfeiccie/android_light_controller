@@ -24,6 +24,7 @@ public class FourKeyButton extends Button
   private Drawable upBitmap;
   private int width;
   private boolean down = false;
+  private boolean leftSelected = true;
   public FourKeyButton(Context paramContext)
   {
     super(paramContext);
@@ -147,22 +148,24 @@ public class FourKeyButton extends Button
 	    	if((x> verticalX_start && x < verticalX_end) &&
 	    		(y>0 && y< (height/4.0f))){
 	    		log("up");
-	    		setBackgroundDrawable(upBitmap);
+	    		setBackgroundDrawable(upBitmap); //ÉÏ¼ü
 	    		keyTouchListener.onUpKeyTouchDown(this);
 	    	}else if((x> verticalX_start && x < verticalX_end) &&
 	        		(y>(height * 3.0f/4.0f) && y< height)){
 	    		log("down");
-	    		setBackgroundDrawable(downBitmap);
+	    		setBackgroundDrawable(downBitmap); //ÏÂ¼ü
 	    		keyTouchListener.onDownKeyTouchDown(this);
 	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
 	        		(x>0 && x< (width / 4.0f))){
 	    		log("left");
-	    		setBackgroundDrawable(leftBitmap);
+	    		setBackgroundDrawable(leftBitmap); //×ó¼ü
+	    		leftSelected = true;
 	    		keyTouchListener.onLeftKeyTouchDown(this);
 	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
 	        		(x>(width*3.0f/4.0f) && x< width)){
 	    		log("right");
-	    		setBackgroundDrawable(rightBitmap);
+	    		setBackgroundDrawable(rightBitmap);//ÓÒ¼ü
+	    		leftSelected = false;
 	    		keyTouchListener.onRightKeyTouchDown(this);
 	    	}
 	    }else{
@@ -178,22 +181,28 @@ public class FourKeyButton extends Button
 	    	if((x> verticalX_start && x < verticalX_end) &&
 	    		(y>0 && y< (height/4.0f))){
 	    		log("up");
-	    		setBackgroundDrawable(upBitmap);
+	    		if(leftSelected){
+	    		setBackgroundDrawable(leftBitmap);
+	    		}else{
+	    		setBackgroundDrawable(rightBitmap);	
+	    		}
 	    		keyTouchListener.onUpKeyTouchUp(this);
 	    	}else if((x> verticalX_start && x < verticalX_end) &&
 	        		(y>(height * 3.0f/4.0f) && y< height)){
 	    		log("down");
-	    		setBackgroundDrawable(downBitmap);
+	    		if(leftSelected){
+		    		setBackgroundDrawable(leftBitmap);
+		    	}else{
+		    		setBackgroundDrawable(rightBitmap);	
+		    	}
 	    		keyTouchListener.onDownKeyTouchUp(this);
 	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
 	        		(x>0 && x< (width / 4.0f))){
 	    		log("left");
-	    		setBackgroundDrawable(leftBitmap);
 	    		keyTouchListener.onLeftKeyTouchUp(this);
 	    	}else if((y> horizontalY_start && y < horizontalY_end) &&
 	        		(x>(width*3.0f/4.0f) && x< width)){
 	    		log("right");
-	    		setBackgroundDrawable(rightBitmap);
 	    		keyTouchListener.onRightKeyTouchUp(this);
 	    	}
 	    }else{
