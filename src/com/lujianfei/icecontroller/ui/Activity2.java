@@ -182,6 +182,7 @@ public class Activity2 extends BaseActivity implements OnClickListener,OnCircleI
 		//	int[] data = paramCircleImageView.getRGB();
 		//	mApp.SocketSend(String.format("RGB(%s %s %s)",data[0],data[1],data[2]).getBytes());
 			byte temp = (byte) ((paramCircleImageView.getByteValue()&0xff)/(int)21.3 + 1);
+			temp = colorValue.get(temp);
 			mApp.control_rgb(temp);
 		}
 	}
