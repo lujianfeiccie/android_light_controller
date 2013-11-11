@@ -85,7 +85,8 @@
 
             <!-- 第四个 -->
             <LinearLayout
-               style="@style/layout_button">
+               style="@style/layout_button2"
+               >
 
                 <Button
                     android:id="@id/btn_mode"
@@ -99,7 +100,7 @@
                     />
             </LinearLayout>
             <LinearLayout
-               style="@style/layout_button">
+               style="@style/layout_button2">
 
                 <Button
                     android:id="@id/btn_timer"
@@ -114,7 +115,7 @@
             </LinearLayout>
 
             <LinearLayout
-               style="@style/layout_button"
+               style="@style/layout_button2"
                android:visibility="gone">
 
                 <Button
@@ -130,7 +131,7 @@
             </LinearLayout>
 
             <LinearLayout
-                style="@style/layout_button" >
+                style="@style/layout_button2" >
 
                 <Button
                     android:id="@id/btn_sleep"
@@ -145,7 +146,7 @@
             </LinearLayout>
 
             <LinearLayout
-                style="@style/layout_button"
+                style="@style/layout_button2"
                 android:visibility="gone">
 
                 <Button

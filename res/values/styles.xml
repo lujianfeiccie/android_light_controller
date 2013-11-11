@@ -87,7 +87,16 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">2dp</item>
+        <item name="android:paddingTop">@dimen/activity3_layout_button_padding</item>
+        <item name="android:paddingLeft">@dimen/activity3_layout_button_padding</item>
+        <item name="android:paddingRight">@dimen/activity3_layout_button_padding</item>
+    </style>
+    <style name="layout_button2" >
+         <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">@dimen/activity3_layout_button_padding</item>
+        <item name="android:paddingRight">@dimen/activity3_layout_button_padding</item>
     </style>
     <!-- activity1 and activity3 -->
     <style name="layout_top">

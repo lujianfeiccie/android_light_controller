@@ -25,4 +25,5 @@
     <dimen name="activity3_btn_on_layout_marginright">20dp</dimen>
     <dimen name="activity3_menu_ll_layout_margintop">20dp</dimen>
     <dimen name="activity3_four_toggle_layout_marginTop">15dp</dimen>
+    <dimen name="activity3_layout_button_padding">10dp</dimen>
 </resources>
