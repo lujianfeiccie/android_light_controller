@@ -7,21 +7,26 @@
 
     <include layout="@layout/title_bar2" />
 
-    <LinearLayout
-       style="@style/layout_top">
+    <RelativeLayout
+       style="@style/layout_top"
+       >
 
         <Button
             android:id="@id/btn_on"
-       style="@style/layout_top_button"
-            android:layout_marginRight="20dp"
+       		style="@style/layout_top_button"
+       		android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/activity1_layout_marginright"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btn_on_background" />
 
         <Button
             android:id="@id/btn_off"
              style="@style/layout_top_button"
-            android:layout_marginLeft="20dp"
+             android:layout_alignParentRight="true"
+             android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/activity1_layout_marginright"
             android:background="@drawable/btn_off_background" />
-    </LinearLayout>
+    </RelativeLayout>
         <!-- 中间圆盘按钮 -->
 
         <LinearLayout
@@ -33,12 +38,12 @@
             <RelativeLayout
                 android:id="@id/fourKeyView_rl"
                 android:layout_width="wrap_content"
-                android:layout_height="220.0dip" >
+                android:layout_height="@dimen/activity1_fourKeyView_rl_layout_height" >
 
                 <com.lujianfei.icecontroller.ui.custom.FourKeyButton
                     android:id="@id/fourKeyView"
-                    android:layout_width="200.0dip"
-                    android:layout_height="200.0dip"
+                    android:layout_width="@dimen/activity1_fourKeyView_layout_width"
+                    android:layout_height="@dimen/activity1_fourKeyView_layout_width"
                     android:layout_centerInParent="true"
                     downBackground="@drawable/four_down"
                     leftBackground="@drawable/four_left"
@@ -48,8 +53,8 @@
 
                 <Button
                     android:id="@id/btn_w"
-                    android:layout_width="35.0dip"
-                    android:layout_height="35.0dip"
+                    android:layout_width="@dimen/activity1_btn_w_layout_width"
+                    android:layout_height="@dimen/activity1_btn_w_layout_width"
                     android:layout_centerInParent="true"
                     android:background="@drawable/btn_center_w_background" />
             </RelativeLayout>
@@ -58,7 +63,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="-10dp"
+            android:layout_marginTop="@dimen/activity1_four_toggle_layout_marginTop"
             android:gravity="top|center"
             android:orientation="horizontal" >
 

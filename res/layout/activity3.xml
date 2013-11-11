@@ -5,28 +5,30 @@
     android:orientation="vertical" 
         android:background="@drawable/back">
 <include layout="@layout/title_bar2"/>
-<LinearLayout
+	<RelativeLayout
         style="@style/layout_top">
 
         <Button
             android:id="@id/btn_on"
             style="@style/layout_top_button"
-                 android:layout_marginRight="20dp"
+            android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="@dimen/activity3_btn_on_layout_marginright"
             android:background="@drawable/btn_on_background" />
 
         <Button
             android:id="@id/btn_off"
-       style="@style/layout_top_button"
-                 android:layout_marginLeft="20dp"
+       		style="@style/layout_top_button"
+       		android:layout_alignParentRight="true"
+                 android:layout_marginRight="@dimen/activity3_btn_on_layout_marginright"
             android:background="@drawable/btn_off_background" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@id/menu_ll"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/activity3_menu_ll_layout_margintop"
         android:gravity="center">
 
         <!-- 第一排 -->
@@ -76,7 +78,12 @@
                     android:text="Reading"
                     />
             </LinearLayout>
-			<!-- 第四个 -->
+        </LinearLayout>
+	  <!-- 第二排 -->
+        <LinearLayout
+            style="@style/layout_row" >
+
+            <!-- 第四个 -->
             <LinearLayout
                style="@style/layout_button">
 
@@ -91,11 +98,6 @@
                     android:text="Mode"
                     />
             </LinearLayout>
-        </LinearLayout>
-	  <!-- 第二排 -->
-        <LinearLayout
-            style="@style/layout_row" >
-
             <LinearLayout
                style="@style/layout_button">
 
@@ -112,11 +114,12 @@
             </LinearLayout>
 
             <LinearLayout
-               style="@style/layout_button">
+               style="@style/layout_button"
+               android:visibility="gone">
 
                 <Button
                     android:id="@id/btn_alarm"
-                style="@style/activity3_button"
+                	style="@style/activity3_button"
                     android:background="@drawable/btn_alarm_background" />
 
                 <TextView
@@ -142,7 +145,8 @@
             </LinearLayout>
 
             <LinearLayout
-                style="@style/layout_button">
+                style="@style/layout_button"
+                android:visibility="gone">
 
                 <Button
                     android:id="@id/btn_recreation"
@@ -162,7 +166,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/activity3_four_toggle_layout_marginTop"
             android:gravity="top|center"
             android:orientation="horizontal" >
 
