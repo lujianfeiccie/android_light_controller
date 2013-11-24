@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-      <string name="app_name">GARANT</string>
+      <string name="app_name">Nuevosun</string>
        <string name="menu_settings">Settings</string>
        <string name="setting_layout_ip">Server:</string>
        <string name="setting_layout_port">Port:</string>
