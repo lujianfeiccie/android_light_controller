@@ -7,18 +7,22 @@
     <dimen name="dialog_btn_height">30.0dip</dimen>
     <dimen name="dialog_btn_width">96.0dip</dimen>
     <dimen name="dialog_text_size">25.0sp</dimen>
+    <dimen name="activity_first_layout_margintop">10dp</dimen>
+    
     <!-- activity1 -->
     <dimen name="activity1_layout_marginright">20dp</dimen>
     <dimen name="activity1_fourKeyView_rl_layout_height">220.0dip</dimen>
     <dimen name="activity1_fourKeyView_layout_width">200.0dip</dimen>
     <dimen name="activity1_btn_w_layout_width">35.0dip</dimen>
     <dimen name="activity1_four_toggle_layout_marginTop">-10dp</dimen>
+    <dimen name="activity1_four_buttons_layout_marginTop">0dp</dimen>
     <!-- activity2 -->
     <dimen name="activity2_layout_marginTop">5dp</dimen>
     <dimen name="activity2_btn_on_layout_width">90.0dip</dimen>
     <dimen name="activity2_btn_on_layout_height">35.0dip</dimen>
     <dimen name="activity2_btn_on_layout_marginRight">20dp</dimen>
     <dimen name="activity2_circleImageView_rl_layout_height">200.0dip</dimen>
+    <dimen name="activity2_circle_layout_marginTop">0.0dip</dimen>
     <dimen name="activity2_btn_rgb_layout_width">35.0dip</dimen>
     <dimen name="activity2_four_toggle_layout_marginTop">-10dp</dimen>
     <!-- activity3 -->

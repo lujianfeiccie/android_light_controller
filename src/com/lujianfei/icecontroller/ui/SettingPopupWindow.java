@@ -38,9 +38,9 @@ public class SettingPopupWindow implements OnClickListener{
 	
 	public void updateControl(){
 		if(mApp.isConnecting()){
-			bt_confirm.setText("断开");
+			bt_confirm.setText(R.string.setting_layout_disconnect);
 		}else{
-			bt_confirm.setText("连接");
+			bt_confirm.setText(R.string.setting_layout_connect);
 		}
 	}
 	public PopupWindow getWindow() {
@@ -87,11 +87,11 @@ public class SettingPopupWindow implements OnClickListener{
 					public void run() {
 						// TODO Auto-generated method stub
 							if(!Util.isIpValid(t_ip)){
-								showToast("IP输入有误!");
+								showToast(R.string.setting_layout_ip_error);
 								return;
 							}
 							else if(!Util.isPortValid(t_port)){
-								showToast("端口输入有误!");
+								showToast(R.string.setting_layout_port_error);
 								return;
 							}
 							mApp.SocketConnect(t_ip, t_port);
@@ -106,6 +106,9 @@ public class SettingPopupWindow implements OnClickListener{
 		}
 	}  
 	void showToast(String msg){
+		Toast.makeText(activity, msg, 200).show();
+	}
+	void showToast(int msg){
 		Toast.makeText(activity, msg, 200).show();
 	}
 }

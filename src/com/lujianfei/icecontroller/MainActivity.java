@@ -102,7 +102,7 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 				intent_service.putExtra(Common.MessageOfService.IP_PORT,port);
 				MainActivity.this.startService(intent_service);
 			}else{
-				Toast.makeText(this, "已连接", 200).show();
+				Toast.makeText(this,R.string.mainactivity_connected, 200).show();
 			}
 		}else{
 			log("data==null");
@@ -117,22 +117,22 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 			switch(msg.what){
 			case Common.UI_CONNECTING://Searching
 				log("UI_CONNECTING");
-				pd.setMessage("正在连接中,请稍后...");
+				pd.setMessage(getResources().getString(R.string.mainactivity_connecting));
 					break;
 			case Common.UI_CONNECT_SUCCESFULLY://Found
 				log("UI_CONNECT_SUCCESFULLY");
-				pd.setMessage("成功连接");
+				pd.setMessage(getResources().getString(R.string.mainactivity_connected_successfully));
 				pd.dismiss();
 				Toast.makeText(MainActivity.this
-						, "成功连接!", 200).show();
+						, R.string.mainactivity_connected_successfully, 200).show();
 				myApp.saveConnectionInfo(edit_ip.getText().toString(),
 						Integer.parseInt(edit_port.getText().toString()));
 				//找到了
-				txt_status_msg.setText("已连接");
+				txt_status_msg.setText(R.string.mainactivity_connected);
 				break;
 			case Common.UI_CONNECT_FAILED:{//没找到
 				log("UI_CONNECT_FAILED");
-				pd.setMessage("连接失败");
+				pd.setMessage(getResources().getString(R.string.mainactivity_connect_failed));
 				pd.dismiss();
 				//连接后发送时出现的异常
 				DialogConnectionTerminated();
@@ -153,18 +153,18 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 				break;
 			case Common.UI_CONNECTED:{
 				log("UI_CONNECTED");
-				pd.setMessage("已连接!");
+				pd.setMessage(getResources().getString(R.string.mainactivity_connected));
 				pd.dismiss();
-				Toast.makeText(MainActivity.this, "已连接！", 200).show();
-				txt_status_msg.setText("已连接");
+				Toast.makeText(MainActivity.this, R.string.mainactivity_connected, 200).show();
+				txt_status_msg.setText(R.string.mainactivity_connected);
 				}
 			case Common.UI_CONNECTION_STATE:{
 				log("UI_CONNECTION_STATE");
 				if(msg.arg1 == Common.UI_CONNECTION_STATE_CONNECTED){
-					txt_status_msg.setText("已连接");
+					txt_status_msg.setText(R.string.mainactivity_connected);
 					log("CONNECTED");
 				}else{
-					txt_status_msg.setText("未连接");
+					txt_status_msg.setText(R.string.mainactivity_disconnected);
 					log("DISCONNECTED");
 				}
 			}
@@ -174,9 +174,7 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 		}
 	};
 	
-	void log(String msg){
-		Log.d(tag, msg);
-	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -198,11 +196,11 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 		Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
 		Matcher matcher = pattern.matcher(addr); //以验证127.400.600.2为例
 		if(!matcher.matches()){
-			Toast.makeText(this, "请输入正确的IP地址", 200).show();
+			Toast.makeText(this, R.string.setting_layout_ip_error, 200).show();
 			return;
 		}
 		if(port<=1024 || port>=65535){
-			Toast.makeText(this, "请输入正确范围的端口号(1024,65535)", 200).show();
+			Toast.makeText(this, R.string.setting_layout_port_error, 200).show();
 			return;
 		}
 		//连接请求
@@ -213,7 +211,7 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 		intent_service.putExtra(Common.MessageOfService.IP_PORT, port);
 		intent_service.putExtra(Common.MessageOfService.SERVICE_REQUEST,Common.MessageValueOfService.LAUNCH_TCP_CONNECTION_SERVICE);
 		MainActivity.this.startService(intent_service);
-		pd = ProgressDialog.show(this, "提示", "正在连接中...请稍候");
+		pd = ProgressDialog.show(this,getResources().getString(R.string.mainactivity_title),getResources().getString(R.string.mainactivity_connecting));
 		isDisconnectedByMyself = false;
 	}
 	
@@ -241,10 +239,10 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 	void DialogConnectionTerminated(){
 		//连接后发送时出现的异常
 		Dialog alertDialog = new AlertDialog.Builder(MainActivity.this). 
-                setTitle("提示"). 
-                setMessage("连接异常，重连?"). 
+                setTitle(R.string.mainactivity_title). 
+                setMessage(R.string.mainactivity_connect_error). 
                 setIcon(R.drawable.icon). 
-                setPositiveButton("确定", new DialogInterface.OnClickListener() { 
+                setPositiveButton(R.string.mainactivity_ok, new DialogInterface.OnClickListener() { 
                     @Override 
                     public void onClick(DialogInterface dialog, int which) { 
                         // TODO Auto-generated method stub 
@@ -252,7 +250,7 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
                     	RequestServiceConnect(edit_ip.getText().toString(), Integer.parseInt(edit_port.getText().toString()));
                     } 
                 }). 
-                setNegativeButton("取消", new DialogInterface.OnClickListener() { 
+                setNegativeButton(R.string.mainactivity_cancel, new DialogInterface.OnClickListener() { 
                     @Override 
                     public void onClick(DialogInterface dialog, int which) { 
                         // TODO Auto-generated method stub  
@@ -268,9 +266,9 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 		 if(keyCode==KeyEvent.KEYCODE_BACK){
 			 //弹出确定退出对话框
 			 new AlertDialog.Builder(this)
-			  .setTitle("退出")
-			  .setMessage("确定退出吗？")
-			  .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			  .setTitle(R.string.mainactivity_title)
+			  .setMessage(R.string.mainactivity_exit_message)
+			  .setPositiveButton(R.string.mainactivity_ok, new DialogInterface.OnClickListener() {
 			     @Override
                  public void onClick(DialogInterface dialog, int which) {
                      // TODO Auto-generated method stub
@@ -278,7 +276,7 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
                     MainActivity.this.finish();
                  }
              })
-            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.mainactivity_cancel, new DialogInterface.OnClickListener() {
                  @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub
@@ -311,6 +309,9 @@ public class MainActivity extends Activity implements OnClickListener,android.wi
 //		MainActivity.this.startService(intent_service);
 		MainActivity.this.stopService(intent_service);
 		
+	}
+	void log(String msg){
+		Log.d(tag, msg);
 	}
 }
 

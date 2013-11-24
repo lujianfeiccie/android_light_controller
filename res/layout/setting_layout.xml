@@ -11,13 +11,13 @@
 
         <LinearLayout style="@style/setting_bg_layout" >
 
-            <!-- 反馈建议 -->
+            <!-- IP -->
 
             <LinearLayout style="@style/setting_bg_top_layout" >
 
                 <TextView
                     style="@style/textview"
-                    android:text="IP地址"
+                    android:text="@string/setting_layout_ip"
                     />
                 
                  <EditText
@@ -30,13 +30,14 @@
                 android:layout_height="1.0px"
                 android:background="@drawable/setting_shape_line" />
 
-            <!-- 关于 -->
+            <!-- 端口 -->
 
             <LinearLayout style="@style/setting_bg_bottom_layout" >
 
                 <TextView
                    style="@style/textview"
-                    android:text="端口"
+                    android:text="@string/setting_layout_port"
+                    android:paddingLeft="10dp"
                     />
                 
                 <EditText
@@ -56,7 +57,7 @@
                  android:layout_height="40dp"
                  android:layout_weight="0.93"
                  android:background="@drawable/setting_button"
-                 android:text="连接"
+                 android:text="@string/setting_layout_connect"
                  android:textColor="@color/setting_button" />
          </LinearLayout>
     </LinearLayout>

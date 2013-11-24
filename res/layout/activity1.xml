@@ -33,7 +33,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/activity1_four_buttons_layout_marginTop"
+            >
 
             <RelativeLayout
                 android:id="@id/fourKeyView_rl"

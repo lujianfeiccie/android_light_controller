@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.lujianfei.icecontroller.Common;
-import com.lujianfei.icecontroller.MainActivity;
 import com.lujianfei.icecontroller.Protocol;
 import com.lujianfei.icecontroller.model.ConnectionInfo;
 import com.lujianfei.icecontroller.services.SocketConnectionService;
@@ -81,6 +81,8 @@ public class CrashApplication extends Application {
         CrashHandler crashHandler = CrashHandler.getInstance();  
         crashHandler.init(getApplicationContext()); 
         crashHandler.setCrashListener(crashListener);
+        DisplayMetrics metrics = getApplicationContext().getResources().getDisplayMetrics();
+        log(String.format("%sx%s",metrics.widthPixels,metrics.heightPixels));
     }  
 	@Override
 	public void onLowMemory() {

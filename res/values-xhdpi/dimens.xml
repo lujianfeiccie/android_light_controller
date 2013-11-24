@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_first_layout_margintop">15dp</dimen>
+    
+    
+    <dimen name="activity1_four_toggle_layout_marginTop">30dp</dimen>
+    <dimen name="activity1_four_buttons_layout_marginTop">40dp</dimen>
+    
+    <dimen name="activity2_layout_marginTop">15dp</dimen>
+    <dimen name="activity2_four_toggle_layout_marginTop">30dp</dimen>
+    <dimen name="activity2_circle_layout_marginTop">20dip</dimen>
+    
+    <dimen name="activity3_menu_ll_layout_margintop">60dp</dimen>
+    <dimen name="activity3_four_toggle_layout_marginTop">50dp</dimen>
+</resources>
