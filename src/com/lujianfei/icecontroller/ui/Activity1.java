@@ -1,22 +1,19 @@
 package com.lujianfei.icecontroller.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.lujianfei.icecontroller.Protocol;
 import com.lujianfei.icecontroller.R;
-import com.lujianfei.icecontroller.handler.MyHandler;
 import com.lujianfei.icecontroller.ui.custom.FourKeyButton;
 import com.lujianfei.icecontroller.ui.custom.FourKeyButton.OnFourKeyTouchListener;
 import com.lujianfei.icecontroller.ui.custom.TwoKeyButton;
-import com.lujianfei.icecontroller.ui.others.GlobalData;
-import com.lujianfei.icecontroller.ui.util.Util;
 
 public class Activity1 extends BaseActivity 
 implements OnClickListener,

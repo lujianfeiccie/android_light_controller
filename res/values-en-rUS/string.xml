@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
       <string name="app_name">Nuevosun</string>
-       <string name="menu_settings">Settings</string>
+          <string name="menu_settings">Settings</string>
        <string name="setting_layout_ip">Server:</string>
        <string name="setting_layout_port">Port:</string>
        <string name="setting_layout_connect">Connect</string>
        <string name="setting_layout_disconnect">Disonnect</string>
        <string name="setting_layout_ip_error">IP invalid!</string>
        <string name="setting_layout_port_error">Port invalid!</string>
+       <string name="setting_layout_name_error">Name invalid!</string>
        <string name="mainactivity_connected">Connected!</string>
        <string name="mainactivity_connecting">Connecting...</string>
        <string name="mainactivity_connected_successfully">Connected successfully!</string>
@@ -18,4 +19,16 @@
        <string name="mainactivity_ok">Sure</string>
        <string name="mainactivity_cancel">Cancel</string>
        <string name="mainactivity_connect_error">Connect error! reconnect?</string>
+       
+       <string name="setting_edit_activity_edit">Edit</string>
+       <string name="setting_edit_activity_ip">IP:</string>
+       <string name="setting_edit_activity_port">Port:</string>
+       <string name="setting_edit_activity_name">Name:</string>
+       <string name="setting_edit_activity_cancel">Cancel</string>
+       <string name="setting_edit_activity_ok">Ok</string>
+       
+       <string name="setting_activity_item_longclick_connect">Connect</string>
+       <string name="setting_activity_item_longclick_edit">Edit</string>
+       <string name="setting_activity_item_longclick_delete">Delete</string>
+       <string name="setting_activity_item_longclick_cancel">Cancel</string>
 </resources>

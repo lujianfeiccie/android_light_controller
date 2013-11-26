@@ -1,8 +1,10 @@
 package com.lujianfei.icecontroller.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 
 import com.lujianfei.icecontroller.R;
 import com.lujianfei.icecontroller.exception.CrashApplication;
@@ -18,6 +20,7 @@ public class BaseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 			mApp = (CrashApplication) CrashApplication.getContext();
 			mPopupWindow = new SettingPopupWindow(this);
 		     ConnectionInfo mConnectionInfo=mApp.loadConnectionInfo();
@@ -27,8 +30,9 @@ public class BaseActivity extends Activity {
 		    mApp.setHandler(mMyHandler);
 	}
 	protected void showSettingDialog(){
-		View view = findViewById(R.id.btn_home);
+		/*View view = findViewById(R.id.btn_home);
 		mPopupWindow.getWindow().showAsDropDown(view, Util.DipToPixels(this, -30),Util.DipToPixels(this, 20));
-		mPopupWindow.updateControl();
+		mPopupWindow.updateControl();*/
+		startActivity(new Intent(this,SettingActivity.class));
 	}
 }

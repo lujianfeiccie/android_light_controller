@@ -142,4 +142,15 @@ public class Util
 		}
 	  return true;
   }
+  /**
+   * Ãû³Æ
+   * @param username
+   * @return
+   */
+  public static boolean isNameValid(String username){
+	  if(username.equals("")){
+		  return false;
+	  }
+	  return true;
+  }
 }

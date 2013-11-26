@@ -3,6 +3,7 @@ package com.lujianfei.icecontroller.ui;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;

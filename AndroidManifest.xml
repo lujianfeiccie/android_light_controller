@@ -39,6 +39,8 @@
        <activity android:name=".ui.Activity3" android:screenOrientation="portrait" />
         <activity android:name=".ui.Activity2" android:screenOrientation="portrait" />
          <activity android:name=".ui.Activity1" android:screenOrientation="portrait" />
+         <activity android:name=".ui.SettingActivity" android:screenOrientation="portrait" />
+         <activity android:name=".ui.SettingEditActivity" android:screenOrientation="portrait" />
         <service 
             android:name=".services.SocketConnectionService">
         </service>

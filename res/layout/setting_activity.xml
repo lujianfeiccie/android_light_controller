@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="#000000"
+    >
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/setting_activity_title_layout_height"
+    android:orientation="vertical" 
+    android:background="#36312e"
+    android:id="@id/imageView1"
+    >
+    <TextView 
+        android:layout_width="wrap_content"
+    	android:layout_height="fill_parent"
+    	android:textSize="18sp"
+        android:text="@string/setting_activity_title_setting"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/setting_activity_title_textview_layout_marginTop"
+        android:layout_marginBottom="@dimen/setting_activity_title_textview_layout_marginTop"
+        android:textColor="@color/white"
+        android:layout_marginLeft="@dimen/setting_activity_title_textview_layout_marginTop"/>
+    <Button 
+        android:id="@+id/bt_add"
+        android:layout_width="@dimen/setting_activity_title_add_button_layout_width"
+    	android:layout_height="fill_parent"
+        android:text="@string/setting_activity_title_add"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/setting_activity_title_add_button_layout_marginTop"
+        android:layout_marginBottom="@dimen/setting_activity_title_add_button_layout_marginTop"
+        android:layout_marginRight="@dimen/setting_activity_title_add_button_layout_marginTop"
+        android:background="#f6b800"
+        android:textColor="@color/white"
+        />
+    </RelativeLayout>
+    <ListView 
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+</LinearLayout>
