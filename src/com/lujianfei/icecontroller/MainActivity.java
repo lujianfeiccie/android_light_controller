@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lujianfei.icecontroller.R;
 import com.lujianfei.icecontroller.exception.CrashApplication;
 import com.lujianfei.icecontroller.model.ConnectionInfo;
 import com.lujianfei.icecontroller.services.SocketConnectionService;

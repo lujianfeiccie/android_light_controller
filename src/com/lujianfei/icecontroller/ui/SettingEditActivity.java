@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lujianfei.icecontroller.R;
+import com.lujianfei.icecontroller.database.DBManager;
+import com.lujianfei.icecontroller.model.ConnectionInfo;
 import com.lujianfei.icecontroller.ui.util.Util;
 
 /*
@@ -32,13 +34,14 @@ public class SettingEditActivity extends BaseActivity implements OnClickListener
 	EditText edit_name;
 	Button bt_cancel;
 	Button bt_ok;
-	
+	private DBManager dbmanager;  
+	String type = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.setting_edit_activity);
-		
+		dbmanager = new DBManager(this);
 		initView();
 		initEvent();
 		intiData();
@@ -47,9 +50,10 @@ public class SettingEditActivity extends BaseActivity implements OnClickListener
 	private void intiData() {
 		// TODO Auto-generated method stub
 		Intent intent = getIntent();
-		if(intent.getStringExtra("type").equals("add")){
+		type = intent.getStringExtra("type");
+		if(type.equals("add")){
 			log("add");
-		}else if(intent.getStringExtra("type").equals("edit")){
+		}else if(type.equals("edit")){
 			log("edit");
 		}
 	}
@@ -103,11 +107,10 @@ public class SettingEditActivity extends BaseActivity implements OnClickListener
 				showToast(R.string.setting_layout_name_error);
 				return;
 			}
-				
 			Intent intent = new Intent(this,SettingActivity.class);
-			intent.putExtra("edit_ip", edit_ip.getText().toString());
-			intent.putExtra("edit_port", edit_port.getText().toString());
-			intent.putExtra("edit_name", edit_name.getText().toString());
+			intent.putExtra("edit_ip", ip);
+			intent.putExtra("edit_port", ""+port);
+			intent.putExtra("edit_name", name);
 			setResult(RESULT_OK, intent);
 			finish();
 			break;

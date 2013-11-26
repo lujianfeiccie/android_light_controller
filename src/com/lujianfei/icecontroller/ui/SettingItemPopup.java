@@ -24,7 +24,7 @@ import com.lujianfei.icecontroller.R;
 public class SettingItemPopup extends AlertDialog {
 
 	private android.view.View.OnClickListener listener;
-	Button bt_connect;
+	public Button bt_connect;
 	Button bt_edit;
 	Button bt_delete;
 	Button bt_cancel;

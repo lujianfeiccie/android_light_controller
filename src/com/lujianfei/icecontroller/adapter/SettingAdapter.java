@@ -1,15 +1,12 @@
 package com.lujianfei.icecontroller.adapter;
 
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lujianfei.icecontroller.R;
@@ -78,7 +75,10 @@ public class SettingAdapter extends BaseAdapter {
 
 		return convertView;
 	}
-
+	public void refreshList(List<ConnectionInfo> mData) {
+		this.mData = mData;
+		this.notifyDataSetChanged();
+	}
 	public final class ViewHolder {
 		public TextView txt_name;
 		public TextView txt_ip;

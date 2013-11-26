@@ -13,9 +13,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.lujianfei.icecontroller.R;
 import com.lujianfei.icecontroller.adapter.SettingAdapter;
+import com.lujianfei.icecontroller.database.DBManager;
 import com.lujianfei.icecontroller.model.ConnectionInfo;
 
 /*
@@ -32,7 +34,7 @@ import com.lujianfei.icecontroller.model.ConnectionInfo;
 类中的代码包括三个区段：类变量区、类属性区、类方法区。
 文件调用:
  */
-public class SettingActivity extends BaseActivity implements OnItemClickListener,OnItemLongClickListener{
+public class SettingActivity extends BaseActivity implements OnItemClickListener{
 	private List<ConnectionInfo> mData;
 	SettingAdapter mSettingAdapter = null;
 	ListView listview = null;
@@ -40,47 +42,35 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 	Button bt_add;
 	final int REQUEST_EDIT=2; 
 	final int REQUEST_ADD=3; 
+	private DBManager dbmanager;
+	private int selectedIndex = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.setting_activity);
+		dbmanager = new DBManager(this);
 		initView();
 		initData();
 	}
 	private void initData() {
-		for(int i=0;i<5;i++){
-			ConnectionInfo mConnectionInfo = new ConnectionInfo();
-			mConnectionInfo.setAddr(String.format("192.168.1.%s",i));
-			mConnectionInfo.setName(String.format("name%s", i));
-			mConnectionInfo.setPort(123);
-			mData.add(mConnectionInfo);
-		}
-		mSettingAdapter.notifyDataSetChanged();
 		mSettingItemPopup = new SettingItemPopup(this,onPopupViewListener);
+		mData = new ArrayList<ConnectionInfo>();
+		mSettingAdapter = new SettingAdapter(this, mData);
 	}
 	private void initView() {
 		listview = (ListView)findViewById(R.id.listview);
 		bt_add = (Button)findViewById(R.id.bt_add);
-		mData = new ArrayList<ConnectionInfo>();
-		mSettingAdapter = new SettingAdapter(this, mData);
 		listview.setAdapter(mSettingAdapter);
 		listview.setOnItemClickListener(this);
-		listview.setOnItemLongClickListener(this);
 		bt_add.setOnClickListener(onTitleListener);
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
 		log(String.format("%s", arg2));
+		selectedIndex = arg2;
 		mSettingItemPopup.show();
-	}
-	@Override
-	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
-			long arg3) {
-		// TODO Auto-generated method stub
-		//startActivity(new Intent(this, SettingEditActivity.class));
-		return false;
 	}
 	android.view.View.OnClickListener onTitleListener = new OnClickListener() {
 		@Override
@@ -90,7 +80,7 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 			case R.id.bt_add:
 				Intent intent = new Intent(SettingActivity.this, SettingEditActivity.class);
 				intent.putExtra("type", "add");
-				startActivityForResult(intent,REQUEST_EDIT);
+				startActivityForResult(intent,REQUEST_ADD);
 				break;
 			default:
 				break;
@@ -116,6 +106,16 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 				break;
 			case R.id.bt_delete:
 				log("delete");
+				ConnectionInfo mConnectionInfo = mData.get(selectedIndex);
+				int flag =  dbmanager.delete(mConnectionInfo);
+				if(flag>0){
+					showToast(R.string.setting_activity_delete);
+					reload();
+				}
+				
+				if(mSettingItemPopup!=null){
+					mSettingItemPopup.dismiss();
+				}
 				break;
 			case R.id.bt_cancel:
 				log("cancel");
@@ -146,10 +146,29 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 			break;
 		case REQUEST_ADD:
   			log(String.format("add %s %s %s", ip,port,name));
+  			ConnectionInfo mConnectionInfo = new ConnectionInfo(ip,Integer.parseInt(port),name);
+  			dbmanager.add(mConnectionInfo);
 			break;
 		default:
 			break;
 		}
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		reload();
+	//	dbmanager.showAllTable();
+	}
+	void reload(){
+		mData = dbmanager.query();
+		mSettingAdapter.refreshList(mData);	
+	}
+	void showToast(int msg){
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+	}
+	void showToast(String msg){
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}
 	void log(String msg){
 		Log.d(getClass().getSimpleName(), msg);

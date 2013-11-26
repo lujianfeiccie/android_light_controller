@@ -31,4 +31,6 @@
        <string name="setting_activity_item_longclick_edit">Edit</string>
        <string name="setting_activity_item_longclick_delete">Delete</string>
        <string name="setting_activity_item_longclick_cancel">Cancel</string>
+       
+       <string name="setting_activity_delete">Delete successfully!</string>
 </resources>
