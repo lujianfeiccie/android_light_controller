@@ -35,4 +35,5 @@
        <string name="setting_activity_title_setting">Setting</string>
        <string name="setting_activity_title_add">Add</string>
        <string name="setting_activity_delete">Delete successfully!</string>
+       <string name="setting_activity_msg_disconnect">Is connecting,\nWanna disconnect?</string>
 </resources>

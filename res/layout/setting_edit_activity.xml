@@ -40,7 +40,7 @@
             android:layout_width="fill_parent"
     		android:layout_height="wrap_content"
     		android:layout_marginRight="@dimen/setting_edit_title_bar_marginleft"
-    		android:text="192.168.1.1"
+    		android:text="192.168.1.107"
             />
     </RelativeLayout>
     <!-- Port -->
@@ -62,7 +62,7 @@
             android:layout_width="fill_parent"
     		android:layout_height="wrap_content"
     		android:layout_marginRight="@dimen/setting_edit_title_bar_marginleft"
-    		android:text="1234"
+    		android:text="8080"
             />
     </RelativeLayout>
     <!-- Name -->

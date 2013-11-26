@@ -3,18 +3,24 @@ package com.lujianfei.icecontroller.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.lujianfei.icecontroller.Common;
 import com.lujianfei.icecontroller.R;
 import com.lujianfei.icecontroller.adapter.SettingAdapter;
 import com.lujianfei.icecontroller.database.DBManager;
@@ -44,9 +50,9 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 	final int REQUEST_ADD=3; 
 	private DBManager dbmanager;
 	private int selectedIndex = 0;
+	ConnectionInfo mConnectionInfo;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.setting_activity);
 		dbmanager = new DBManager(this);
@@ -57,6 +63,7 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 		mSettingItemPopup = new SettingItemPopup(this,onPopupViewListener);
 		mData = new ArrayList<ConnectionInfo>();
 		mSettingAdapter = new SettingAdapter(this, mData);
+		mApp.setHandler(mHandler);
 	}
 	private void initView() {
 		listview = (ListView)findViewById(R.id.listview);
@@ -70,7 +77,35 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 		// TODO Auto-generated method stub
 		log(String.format("%s", arg2));
 		selectedIndex = arg2;
-		mSettingItemPopup.show();
+		if(mApp.isConnecting()){
+			DisconnectDialog();
+		}else{
+			mSettingItemPopup.show();
+		}
+	}
+	 void DisconnectDialog(){
+		 Dialog alertDialog = new AlertDialog.Builder(this). 
+        setTitle(R.string.mainactivity_title). 
+        setMessage(R.string.setting_activity_msg_disconnect). 
+        setPositiveButton(R.string.setting_edit_activity_ok, new DialogInterface.OnClickListener() { 
+             
+            @Override 
+            public void onClick(DialogInterface dialog, int which) { 
+                // TODO Auto-generated method stub  
+            	dialog.dismiss();
+            	mApp.SocketDisconnect();
+            } 
+        }). 
+        setNegativeButton(R.string.setting_edit_activity_cancel, new DialogInterface.OnClickListener() { 
+             
+            @Override 
+            public void onClick(DialogInterface dialog, int which) { 
+                // TODO Auto-generated method stub
+            	dialog.dismiss();
+            } 
+        }). 
+        create(); 
+	   alertDialog.show(); 
 	}
 	android.view.View.OnClickListener onTitleListener = new OnClickListener() {
 		@Override
@@ -94,6 +129,12 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 			switch (v.getId()) {
 			case R.id.bt_connect:
 				log("connect");
+				mConnectionInfo = mData.get(selectedIndex);
+				showToast(R.string.mainactivity_connecting);
+				mApp.SocketConnect(mConnectionInfo.getAddr(), mConnectionInfo.getPort());
+				if(mSettingItemPopup!=null){
+					mSettingItemPopup.dismiss();
+				}
 				break;
 			case R.id.bt_edit:
 				log("edit");
@@ -106,13 +147,12 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 				break;
 			case R.id.bt_delete:
 				log("delete");
-				ConnectionInfo mConnectionInfo = mData.get(selectedIndex);
+				mConnectionInfo = mData.get(selectedIndex);
 				int flag =  dbmanager.delete(mConnectionInfo);
 				if(flag>0){
 					showToast(R.string.setting_activity_delete);
 					reload();
 				}
-				
 				if(mSettingItemPopup!=null){
 					mSettingItemPopup.dismiss();
 				}
@@ -162,7 +202,8 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 	}
 	void reload(){
 		mData = dbmanager.query();
-		mSettingAdapter.refreshList(mData);	
+		mSettingAdapter.refreshList(mData);
+		listview.setAdapter(mSettingAdapter);
 	}
 	void showToast(int msg){
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -170,6 +211,32 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 	void showToast(String msg){
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}
+	
+	Handler mHandler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			log("handleMessage what="+msg.what);
+			switch (msg.what) {
+			case Common.UI_CONNECTION_STATE_DISCONNECTED:
+				log("UI_CONNECTION_STATE_DISCONNECTED");
+				break;
+			case Common.UI_CONNECTION_STATE_CONNECTED:
+				log("UI_CONNECTION_STATE_CONNECTED");
+				break;
+			case Common.UI_CONNECT_SUCCESFULLY:
+				log("UI_CONNECT_SUCCESFULLY");
+				showToast(R.string.mainactivity_connected_successfully);
+				break;
+			case Common.UI_CONNECT_FAILED:
+				log("UI_CONNECT_FAILED");
+				showToast(R.string.mainactivity_connect_failed);
+				break;
+			default:
+				break;
+			}
+		}
+	};
 	void log(String msg){
 		Log.d(getClass().getSimpleName(), msg);
 	}

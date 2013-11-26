@@ -161,7 +161,6 @@ public class SocketConnectionService extends Service {
 
 		@Override
 		public void onConnectSuccesfull(String ip, int port) {
-			// TODO Auto-generated method stub
 			log("onConnectSuccesfull "+ip+":"+port);
 			myApp.setIp_addr(ip);
 			myApp.setPort(port);
@@ -172,7 +171,6 @@ public class SocketConnectionService extends Service {
 
 		@Override
 		public void onConnectFailed() {
-			// TODO Auto-generated method stub
 			log("onConnectFailed");
 			myApp.setConnecting(false);
 			myApp.getHandler().sendEmptyMessage(Common.UI_CONNECT_FAILED);
