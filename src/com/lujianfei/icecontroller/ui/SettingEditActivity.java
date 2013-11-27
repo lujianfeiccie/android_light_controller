@@ -36,6 +36,7 @@ public class SettingEditActivity extends BaseActivity implements OnClickListener
 	Button bt_ok;
 	private DBManager dbmanager;  
 	String type = "";
+	ConnectionInfo mConnectionInfo;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -53,11 +54,38 @@ public class SettingEditActivity extends BaseActivity implements OnClickListener
 		type = intent.getStringExtra("type");
 		if(type.equals("add")){
 			log("add");
+			addStatus();
 		}else if(type.equals("edit")){
 			log("edit");
+			mConnectionInfo = intent.getParcelableExtra("data");
+			editStatus(mConnectionInfo);
 		}
 	}
 
+	private void addStatus() {
+		edit_ip.setText("");
+		edit_port.setText("");
+		edit_name.setText("");
+	}
+	private void editStatus(String ip,String port,String name) {
+		edit_ip.setText(ip);
+		edit_port.setText(port);
+		edit_name.setText(name);
+	}
+	private void editStatus(ConnectionInfo mConnectionInfo) {
+		edit_ip.setText(mConnectionInfo.getAddr());
+		edit_port.setText(""+mConnectionInfo.getPort());
+		edit_name.setText(mConnectionInfo.getName());
+	}
+	private void editToModel() {
+		if(mConnectionInfo==null){
+			mConnectionInfo = new ConnectionInfo();
+		}
+		mConnectionInfo.setAddr(edit_ip.getText().toString());
+		mConnectionInfo.setPort(Integer.parseInt(edit_port.getText().toString()));
+		mConnectionInfo.setName(edit_name.getText().toString());
+	}
+	
 	private void initEvent() {
 		bt_cancel.setOnClickListener(this);
 		bt_ok.setOnClickListener(this);
@@ -107,10 +135,10 @@ public class SettingEditActivity extends BaseActivity implements OnClickListener
 				showToast(R.string.setting_layout_name_error);
 				return;
 			}
+			
 			Intent intent = new Intent(this,SettingActivity.class);
-			intent.putExtra("edit_ip", ip);
-			intent.putExtra("edit_port", ""+port);
-			intent.putExtra("edit_name", name);
+			editToModel();
+			intent.putExtra("data", mConnectionInfo);
 			setResult(RESULT_OK, intent);
 			finish();
 			break;

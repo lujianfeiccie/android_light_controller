@@ -36,7 +36,7 @@ import com.lujianfei.icecontroller.model.ConnectionInfo;
 设计文档：
 创建日期：2013-11-25 下午7:02:39
 作 者：陆键霏
-内容摘要：
+内容摘要：设置IP列表
 类中的代码包括三个区段：类变量区、类属性区、类方法区。
 文件调用:
  */
@@ -140,6 +140,8 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 				log("edit");
 				Intent intent = new Intent(SettingActivity.this, SettingEditActivity.class);
 				intent.putExtra("type", "edit");
+				ConnectionInfo mConnectionInfo = mData.get(selectedIndex);
+				intent.putExtra("data", mConnectionInfo);
 				startActivityForResult(intent,REQUEST_EDIT);
 				if(mSettingItemPopup!=null){
 					mSettingItemPopup.dismiss();
@@ -177,16 +179,14 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 		if(resultCode!=RESULT_OK){
 			return;
 		 }
-		String ip = data.getStringExtra("edit_ip");
-		String port = data.getStringExtra("edit_port");
-		String name = data.getStringExtra("edit_name");
+		mConnectionInfo = data.getParcelableExtra("data");
 		switch (requestCode) {
 		case REQUEST_EDIT:
-			  log(String.format("edit %s %s %s", ip,port,name));
+			  log(String.format("edit %s", mConnectionInfo.toString()));
+		    dbmanager.update(mConnectionInfo);
 			break;
 		case REQUEST_ADD:
-  			log(String.format("add %s %s %s", ip,port,name));
-  			ConnectionInfo mConnectionInfo = new ConnectionInfo(ip,Integer.parseInt(port),name);
+  			log(String.format("add %s",mConnectionInfo.toString()));
   			dbmanager.add(mConnectionInfo);
 			break;
 		default:
