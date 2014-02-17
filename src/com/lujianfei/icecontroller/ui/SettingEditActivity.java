@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -93,7 +94,9 @@ public class SettingEditActivity extends BaseActivity implements OnClickListener
 
 	private void initView() {
 		edit_ip = (EditText)findViewById(R.id.edit_ip);
+		edit_ip.setInputType(EditorInfo.TYPE_CLASS_PHONE);
 		edit_port = (EditText)findViewById(R.id.edit_port);
+		edit_port.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
 		edit_name = (EditText)findViewById(R.id.edit_name);
 		
 		bt_cancel = (Button)findViewById(R.id.bt_cancel);

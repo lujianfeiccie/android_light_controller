@@ -41,6 +41,8 @@
     		android:layout_height="wrap_content"
     		android:layout_marginRight="@dimen/setting_edit_title_bar_marginleft"
     		android:text="192.168.1.107"
+    		android:digits="1234567890."
+			 android:inputType="numberDecimal"
             />
     </RelativeLayout>
     <!-- Port -->
